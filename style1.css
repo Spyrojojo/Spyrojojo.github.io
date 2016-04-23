@@ -2,8 +2,11 @@ body {
       background-color:#272822;
      }
      
-h1 {
+body {
     font-family : Chaparral;
+ }
+ 
+h1 {
     font-size: 150; 
     color: #f8f8f2; 
     text-align: center;
