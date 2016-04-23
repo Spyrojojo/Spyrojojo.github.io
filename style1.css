@@ -1,13 +1,10 @@
 body {
-      background-color:#272822;
+      background-color:#171714;
+      font-family : Chaparral;
      }
-     
-body {
-    font-family : Chaparral;
- }
  
 h1 {
     font-size: 150; 
-    color: #f8f8f2; 
+    color: #3c3d38; 
     text-align: center;
  }
