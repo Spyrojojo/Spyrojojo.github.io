@@ -17,7 +17,7 @@ h2 {
 a {
     font-size: 25; 
     color: white; 
-    border: 5px #66d9ef solid;
+    border: 5px blue solid;
     border-radius: 5px;
     background-color:#66d9ef;
  }
