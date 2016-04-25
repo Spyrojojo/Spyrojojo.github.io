@@ -19,7 +19,7 @@ a {
     color: white; 
     border: 3px blue dashed;
     border-radius: 5px;
-    a.no-decoration
+    class="no-decoration";
  }
 a.no-decoration {
   text-decoration: none;
