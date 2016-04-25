@@ -18,4 +18,5 @@ a {
     font-size: 25; 
     color: white; 
     border: 3px blue dashed;
+    border-radius: 5px
  }
