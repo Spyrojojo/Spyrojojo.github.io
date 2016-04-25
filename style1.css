@@ -22,7 +22,7 @@ a {
     background-color:#ae81ff;
  }
  table {
-         align="center";
+         text-align: center;
  }
  
 a.no-decoration {
