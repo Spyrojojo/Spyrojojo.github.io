@@ -17,9 +17,9 @@ h2 {
 a {
     font-size: 25; 
     color: white; 
-    border: 5px blue solid;
+    border: 5px #ae81ff solid;
     border-radius: 5px;
-    background-color:#66d9ef;
+    background-color:#ae81ff;
  }
 a.no-decoration {
   text-decoration: none;
