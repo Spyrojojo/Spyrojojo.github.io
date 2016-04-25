@@ -19,7 +19,7 @@ a {
     color: white; 
     border: 1px #66d9ef solid;
     border-radius: 5px;
-    class="no-decoration";
+    background-color:#66d9ef;
  }
 a.no-decoration {
   text-decoration: none;
