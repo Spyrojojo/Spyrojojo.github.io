@@ -21,6 +21,10 @@ a {
     border-radius: 5px;
     background-color:#ae81ff;
  }
+ table {
+         align="center";
+ }
+ 
 a.no-decoration {
   text-decoration: none;
 }
