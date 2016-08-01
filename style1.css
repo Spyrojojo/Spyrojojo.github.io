@@ -1,5 +1,5 @@
 body {
-      background-color:#272822;
+      background-color:#2c9ac9;
       font-family : Chaparral;
      }
  
@@ -17,9 +17,9 @@ h2 {
 a {
     font-size: 25; 
     color: white; 
-    border: 5px #ae81ff solid;
+    border: 5px #af9238 solid;
     border-radius: 5px;
-    background-color:#ae81ff;
+    background-color:#af9238;
  }
  table {
          text-align: center;
