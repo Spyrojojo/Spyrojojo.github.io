@@ -2,42 +2,46 @@ body {
       background-color:#2c9ac9;
       font-family : Hobo Std;
      }
- 
+
 h1 {
-    font-size: 100; 
-    color: white; 
+    font-size: 100;
+    color: white;
     text-align: center;
  }
- 
+
 h2 {
-    font-size: 35; 
-    color: #f8f8f2; 
+    font-size: 35;
+    color: #f8f8f2;
     text-align: center;
  }
 
  h3 {
-    font-size: 28; 
-    color: #f8f8f2; 
+    font-size: 28;
+    color: #f8f8f2;
     text-align: center;
  }
 
 td {
-    font-size: 25; 
-    color: white; 
+    font-size: 25;
+    color: white;
     border: 5px #af9238 solid;
     border-radius: 5px;
     background-color:#af9238;
  }
 
  a {
-    font-size: 25; 
-    color: white; 
+    font-size: 25;
+    color: white;
  }
- 
+
  table {
          text-align: center;
  }
- 
+
+ .color_intro {
+   color: red;
+ }
+
 a.no-decoration {
   text-decoration: none;
 }

@@ -4,22 +4,38 @@
 
   <head>
     <title>Spyrojojo & co</title>
-    <link rel="stylesheet" href="style1.css" />
+    <link rel='stylesheet' href='style1.css' />
   </head>
 
   <body>
-    <center><a href="index.html"><img src="ressource/logo.png" title="Vers la page d'acueil" ></a></center>
+    <center><a href='index.html'><img onclick="alert('on y est déja !');" src='ressource/logo.png' title="Vers la page d'acueil" ></a></center>
     <center><table>
       <tr>
-        <td><a class="no-decoration" href="chibi.html">Galerie des créations</a></td>
-        <td><a class="no-decoration" href="3d.html">Création </a></td>
-        <td><a class="no-decoration" href="RM.html">Projet RPG Maker</a></td>
-        <td><a class="no-decoration" href="http://www.facebook.com/spyrojojo/">Facebook</a></td>
-        <td><a class="no-decoration" href="http://www.youtube.com/channel/UCt41bOvKyY0_1_9nkhtr4eQ">Youtube</a></td>
-        <td><a class="no-decoration" href="http://poorlylickedbear.github.io">Boutique</a></td>
+        <td><a id="op1" class='no-decoration' href='chibi.html'>Ma galerie</a></td>
+        <td><a id="op2" class='no-decoration' href='3d.html' >Mes petit objets</a></td>
+        <td><a id="op3" class='no-decoration' href='RM.html'>Projet Arole</a></td>
+        <td><a id="op4" class='no-decoration' href='http://www.facebook.com/spyrojojo/' title='vers ma page Facebook'>Facebook</a></td>
+        <td><a id="op5" class='no-decoration' href='http://poorlylickedbear.github.io' title='vers ma boutique'>Boutique</a></td>
       </tr>
     </table></center>
-    <h3>Bienvenue sur mon petit site les amis, Bonne visite !</h3>
+    <h3 id="desc">Bienvenue sur mon petit site les amis, Bonne visite !</h3>
+
+    <script>
+
+      var menu1 = document.getElementById('desc');
+      var op1 = document.getElementById('op1');
+      var op2 = document.getElementById('op2');
+      var op3 = document.getElementById('op3');
+      var op4 = document.getElementById('op4');
+      var op5 = document.getElementById('op5');
+
+      op1.onmouseover = function(){menu1.innerHTML = 'Pour voir mes réalisation graphique';};
+      op2.onmouseover = function(){menu1.innerHTML = 'Pour voir mes petit objets fait mains';};
+      op3.onmouseover = function(){menu1.innerHTML = 'Arole : un projet univers';};
+      op4.onmouseover = function(){menu1.innerHTML = 'si vous souhaitez me suivre sur facebook';};
+      op5.onmouseover = function(){menu1.innerHTML = 'Pour allez voir ma boutique';};
+      menu1.onmouseout = function(){menu1.innerHTML = 'Bienvenue sur mon petit site les amis, Bonne visite !';};
+    </script>
   </body>
 
 </html>
