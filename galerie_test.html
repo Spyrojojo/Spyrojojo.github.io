@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Spyrojojo & co</title>
+    <link rel='stylesheet' href='style1.css' />
+  </head>
+
+  <body>
+    <center><a href='index.html'><img src='ressource/logo.png' title="Vers la page d'acueil" ></a></center>
+    <center><table>
+      <tr>
+        <td><a id="op1" onclick="alert('on y est déja !');" class='no-decoration' href='galerie_test.html'>Ma galerie</a></td>
+        <td><a id="op2" class='no-decoration' href='3d.html' >Mes petit objets</a></td>
+        <td><a id="op3" class='no-decoration' href='RM.html'>Projet Arole</a></td>
+        <td><a id="op4" class='no-decoration' href='http://www.facebook.com/spyrojojo/' title='vers ma page Facebook'>Facebook</a></td>
+        <td><a id="op5" class='no-decoration' href='http://poorlylickedbear.github.io' title='vers ma boutique'>Boutique</a></td>
+      </tr>
+    </table></center>
+    <h3 id="desc">Bienvenue sur mon petit site les amis, Bonne visite !</h3>
+    <table align='center'>
+      <tr >
+        <td id='img1'><img src='test/1.png' width="100" height="152"></td>
+        <td id='img2'><img src='test/2.png' width="100" height="152"></td>
+        <td id='img3'><img src='test/3.png' width="100" height="152"></td>
+        <td id='img4'><img src='test/4.png' width="100" height="152"></td>
+        <td id='img5'><img src='test/5.png' width="100" height="152"></td>
+      </tr>
+    <tr>
+      <h2 id='back'>Page precedante</h2>
+      <h2 id='pass'>Page suivante</h2>
+    </tr>
+    </table>
+
+    <script>
+      // Element pour le groupe haut
+      var menu1 = document.getElementById('desc');
+      var op1 = document.getElementById('op1');
+      var op2 = document.getElementById('op2');
+      var op3 = document.getElementById('op3');
+      var op4 = document.getElementById('op4');
+      var op5 = document.getElementById('op5');
+
+      op1.onmouseover = function(){menu1.innerHTML = 'Pour voir mes réalisation graphique';};
+      op2.onmouseover = function(){menu1.innerHTML = 'Pour voir mes petit objets fait mains';};
+      op3.onmouseover = function(){menu1.innerHTML = 'Arole : un projet univers';};
+      op4.onmouseover = function(){menu1.innerHTML = 'si vous souhaitez me suivre sur facebook';};
+      op5.onmouseover = function(){menu1.innerHTML = 'Pour allez voir ma boutique';};
+      menu1.onmouseout = function(){menu1.innerHTML = 'Bienvenue sur mon petit site les amis, Bonne visite !';};
+
+      //Element pour la galerie
+      var img1 = document.getElementById('img1');
+      var img2 = document.getElementById('img2');
+      var img3 = document.getElementById('img3');
+      var img4 = document.getElementById('img4');
+      var img5 = document.getElementById('img5');
+      var pass = document.getElementById('pass');
+      var back = document.getElementById('back');
+      var compt_base = 5;
+      var compt_max = 30;
+      pass.onclick = function(){compt_base += 5;
+                                if (compt_base > compt_max) {compt_base = 5;}
+                                var imgA = compt_base-4; imgB = compt_base-3; imgC = compt_base-2; imgD = compt_base-1;
+                                img1.innerHTML = '<img src="test/'+imgA+'.png" width="100" height="152">';
+                                img2.innerHTML = '<img src="test/'+imgB+'.png" width="100" height="152">';
+                                img3.innerHTML = '<img src="test/'+imgC+'.png" width="100" height="152">';
+                                img4.innerHTML = '<img src="test/'+imgD+'.png" width="100" height="152">';
+                                img5.innerHTML = '<img src="test/'+compt_base+'.png" width="100" height="152">';
+                                };
+
+      back.onclick = function(){compt_base -= 5;
+                                if (compt_base <= 0) {compt_base = 30;}
+                                var imgA = compt_base-4; imgB = compt_base-3; imgC = compt_base-2; imgD = compt_base-1;
+                                img1.innerHTML = '<img src="test/'+imgA+'.png" width="100" height="152">';
+                                img2.innerHTML = '<img src="test/'+imgB+'.png" width="100" height="152">';
+                                img3.innerHTML = '<img src="test/'+imgC+'.png" width="100" height="152">';
+                                img4.innerHTML = '<img src="test/'+imgD+'.png" width="100" height="152">';
+                                img5.innerHTML = '<img src="test/'+compt_base+'.png" width="100" height="152">';
+                                };
+    </script>
+
+
+  </body>
+
+</html>
