@@ -21,11 +21,16 @@
     <h3 id="desc">Bienvenue sur mon petit site les amis, Bonne visite !</h3>
     <table align='center'>
       <tr >
-        <td id='img1'><img src='test/1.png' width="100" height="152"></td>
-        <td id='img2'><img src='test/2.png' width="100" height="152"></td>
-        <td id='img3'><img src='test/3.png' width="100" height="152"></td>
-        <td id='img4'><img src='test/4.png' width="100" height="152"></td>
-        <td id='img5'><img src='test/5.png' width="100" height="152"></td>
+        <td id='i1'><img id='iA' src='test/1.png' width="100" height="152"></td>
+        <td id='i2'><img id='iB' src='test/2.png' width="100" height="152"></td>
+        <td id='i3'><img id='iC' src='test/3.png' width="100" height="152"></td>
+        <td id='i4'><img id='iD' src='test/4.png' width="100" height="152"></td>
+        <td id='i5'><img id='iE' src='test/5.png' width="100" height="152"></td>
+        <td id='i6'><img id='iF' src='test/6.png' width="100" height="152"></td>
+        <td id='i7'><img id='iG' src='test/7.png' width="100" height="152"></td>
+        <td id='i8'><img id='iH' src='test/8.png' width="100" height="152"></td>
+        <td id='i9'><img id='iI' src='test/9.png' width="100" height="152"></td>
+        <td id='i10'><img id='iJ' src='test/10.png' width="100" height="152"></td>
       </tr>
     <tr>
       <h2 id='back'>Page precedante</h2>
@@ -50,34 +55,42 @@
       menu1.onmouseout = function(){menu1.innerHTML = 'Bienvenue sur mon petit site les amis, Bonne visite !';};
 
       //Element pour la galerie
-      var img1 = document.getElementById('img1');
-      var img2 = document.getElementById('img2');
-      var img3 = document.getElementById('img3');
-      var img4 = document.getElementById('img4');
-      var img5 = document.getElementById('img5');
+      var i1 = document.getElementById('i1'); //iA = document.getElementById('iA');
+      var i2 = document.getElementById('i2'); //iB = document.getElementById('iB');
+      var i3 = document.getElementById('i3'); //iC = document.getElementById('iC');
+      var i4 = document.getElementById('i4'); //iD = document.getElementById('iD');
+      var i5 = document.getElementById('i5'); //iE = document.getElementById('iE');
+      var i6 = document.getElementById('i6'); //iF = document.getElementById('iF');
+      var i7 = document.getElementById('i7'); //iG = document.getElementById('iG');
+      var i8 = document.getElementById('i8'); //iH = document.getElementById('iH');
+      var i9 = document.getElementById('i9'); //iI = document.getElementById('iI');
+      var i10 = document.getElementById('i10'); //iJ = document.getElementById('iJ');
+
       var pass = document.getElementById('pass');
       var back = document.getElementById('back');
-      var compt_base = 5;
-      var compt_max = 30;
-      pass.onclick = function(){compt_base += 5;
-                                if (compt_base > compt_max) {compt_base = 5;}
-                                var imgA = compt_base-4; imgB = compt_base-3; imgC = compt_base-2; imgD = compt_base-1;
-                                img1.innerHTML = '<img src="test/'+imgA+'.png" width="100" height="152">';
-                                img2.innerHTML = '<img src="test/'+imgB+'.png" width="100" height="152">';
-                                img3.innerHTML = '<img src="test/'+imgC+'.png" width="100" height="152">';
-                                img4.innerHTML = '<img src="test/'+imgD+'.png" width="100" height="152">';
-                                img5.innerHTML = '<img src="test/'+compt_base+'.png" width="100" height="152">';
-                                };
+      var cb = 10;
+      var cm = 30;
 
-      back.onclick = function(){compt_base -= 5;
-                                if (compt_base <= 0) {compt_base = 30;}
-                                var imgA = compt_base-4; imgB = compt_base-3; imgC = compt_base-2; imgD = compt_base-1;
-                                img1.innerHTML = '<img src="test/'+imgA+'.png" width="100" height="152">';
-                                img2.innerHTML = '<img src="test/'+imgB+'.png" width="100" height="152">';
-                                img3.innerHTML = '<img src="test/'+imgC+'.png" width="100" height="152">';
-                                img4.innerHTML = '<img src="test/'+imgD+'.png" width="100" height="152">';
-                                img5.innerHTML = '<img src="test/'+compt_base+'.png" width="100" height="152">';
-                                };
+      pass.onclick = function(){cb += 10;
+                                if (cb > cm) {cb = 10;}
+                               refresh_galerie() };
+
+      back.onclick = function(){cb -= 10;
+                                if (cb <= 0) {cb = 30;}
+                                refresh_galerie() };
+
+      function refresh_galerie() {var imA = cb-9; imB = cb-8; imC = cb-7; imD = cb-6; imE = cb-5; imF = cb-4; imG = cb-3; imH = cb-2; imI = cb-1;
+                                  i1.innerHTML = '<img src="test/'+imA+'.png" width="100" height="152">';
+                                  i2.innerHTML = '<img src="test/'+imB+'.png" width="100" height="152">';
+                                  i3.innerHTML = '<img src="test/'+imC+'.png" width="100" height="152">';
+                                  i4.innerHTML = '<img src="test/'+imD+'.png" width="100" height="152">';
+                                  i5.innerHTML = '<img src="test/'+imE+'.png" width="100" height="152">';
+                                  i6.innerHTML = '<img src="test/'+imF+'.png" width="100" height="152">';
+                                  i7.innerHTML = '<img src="test/'+imG+'.png" width="100" height="152">';
+                                  i8.innerHTML = '<img src="test/'+imH+'.png" width="100" height="152">';
+                                  i9.innerHTML = '<img src="test/'+imI+'.png" width="100" height="152">';
+                                  i10.innerHTML = '<img src="test/'+cb+'.png" width="100" height="152">'; };
+
     </script>
 
 
