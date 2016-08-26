@@ -91,11 +91,15 @@
       back.onclick = function(){page_max += page_n
                                 if (page_max > page_m) {page_max = page_n;}
                                 refresh_galerie() };
-
       pass.onclick = function(){page_max -= page_n
                                 if (page_max < page_n) {page_max = page_m;}
                                 refresh_galerie() };
-
+      back2.onclick = function(){page_max += page_n
+                                if (page_max > page_m) {page_max = page_n;}
+                                refresh_galerie() };
+      pass2.onclick = function(){page_max -= page_n
+                                if (page_max < page_n) {page_max = page_m;}
+                                refresh_galerie() };
       function refresh_galerie(){var imgA = page_max;
                                  var imgB = page_max-1;
                                  var imgC = page_max-2;
