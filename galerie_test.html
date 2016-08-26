@@ -19,24 +19,38 @@
       </tr>
     </table></center>
     <h3 id="desc">Bienvenue sur mon petit site les amis, Bonne visite !</h3>
+
     <table align='center'>
-      <tr >
-        <td id='i1'><img id='iA' src='test/1.png' width="100" height="152"></td>
-        <td id='i2'><img id='iB' src='test/2.png' width="100" height="152"></td>
-        <td id='i3'><img id='iC' src='test/3.png' width="100" height="152"></td>
-        <td id='i4'><img id='iD' src='test/4.png' width="100" height="152"></td>
-        <td id='i5'><img id='iE' src='test/5.png' width="100" height="152"></td>
-        <td id='i6'><img id='iF' src='test/6.png' width="100" height="152"></td>
-        <td id='i7'><img id='iG' src='test/7.png' width="100" height="152"></td>
-        <td id='i8'><img id='iH' src='test/8.png' width="100" height="152"></td>
-        <td id='i9'><img id='iI' src='test/9.png' width="100" height="152"></td>
-        <td id='i10'><img id='iJ' src='test/10.png' width="100" height="152"></td>
+      <tr>
+        <td><h2 id='back'>  precedent  </h2></td>
+        <td><h2 id='pass'>  suivante  </h2></td>
       </tr>
-    <tr>
-      <h2 id='back'>Page precedante</h2>
-      <h2 id='pass'>Page suivante</h2>
-    </tr>
+    </table> <!-- Precedent/suivant haut -->
+
+    <table align='center'> <!-- Galerie d'image "imgX"-->
+      <tr>
+        <td id="img1" ><img src='test/85.png'></td>
+        <td id="img2" ><img src='test/84.png'></td>
+        <td id="img3" ><img src='test/83.png'></td>
+      </tr>
+      <tr>
+        <td id="img4" ><img src='test/82.png'></td>
+        <td id="img5" ><img src='test/81.png'></td>
+        <td id="img6" ><img src='test/80.png'></td>
+      </tr>
+      <tr>
+        <td id="img7" ><img src='test/79.png'></td>
+        <td id="img8" ><img src='test/78.png'></td>
+        <td id="img9" ><img src='test/77.png'></td>
+      </tr>
     </table>
+
+    <table align='center'>
+      <tr>
+        <td><h2 id='back2'>  precedent  </h2></td>
+        <td><h2 id='pass2'>  suivante  </h2></td>
+      </tr>
+    </table> <!-- Precedent/suivant bas -->
 
     <script>
       // Element pour le groupe haut
@@ -55,41 +69,51 @@
       menu1.onmouseout = function(){menu1.innerHTML = 'Bienvenue sur mon petit site les amis, Bonne visite !';};
 
       //Element pour la galerie
-      var i1 = document.getElementById('i1'); //iA = document.getElementById('iA');
-      var i2 = document.getElementById('i2'); //iB = document.getElementById('iB');
-      var i3 = document.getElementById('i3'); //iC = document.getElementById('iC');
-      var i4 = document.getElementById('i4'); //iD = document.getElementById('iD');
-      var i5 = document.getElementById('i5'); //iE = document.getElementById('iE');
-      var i6 = document.getElementById('i6'); //iF = document.getElementById('iF');
-      var i7 = document.getElementById('i7'); //iG = document.getElementById('iG');
-      var i8 = document.getElementById('i8'); //iH = document.getElementById('iH');
-      var i9 = document.getElementById('i9'); //iI = document.getElementById('iI');
-      var i10 = document.getElementById('i10'); //iJ = document.getElementById('iJ');
+      var img1 = document.getElementById('img1')
+      var img2 = document.getElementById('img2')
+      var img3 = document.getElementById('img3')
+      var img4 = document.getElementById('img4')
+      var img5 = document.getElementById('img5')
+      var img6 = document.getElementById('img6')
+      var img7 = document.getElementById('img7')
+      var img8 = document.getElementById('img8')
+      var img9 = document.getElementById('img9')
 
-      var pass = document.getElementById('pass');
-      var back = document.getElementById('back');
-      var cb = 10;
-      var cm = 30;
+      //variable MAJ galerie
+      var pass = document.getElementById('pass')
+      var back = document.getElementById('back')
+      var pass2 = document.getElementById('pass2')
+      var back2 = document.getElementById('back2')
+      var page_n = 9
+      var page_m = 85
+      var page_max = page_m
 
-      pass.onclick = function(){cb += 10;
-                                if (cb > cm) {cb = 10;}
-                               refresh_galerie() };
-
-      back.onclick = function(){cb -= 10;
-                                if (cb <= 0) {cb = 30;}
+      back.onclick = function(){page_max += page_n
+                                if (page_max > page_m) {page_max = page_n;}
                                 refresh_galerie() };
 
-      function refresh_galerie() {var imA = cb-9; imB = cb-8; imC = cb-7; imD = cb-6; imE = cb-5; imF = cb-4; imG = cb-3; imH = cb-2; imI = cb-1;
-                                  i1.innerHTML = '<img src="test/'+imA+'.png" width="100" height="152">';
-                                  i2.innerHTML = '<img src="test/'+imB+'.png" width="100" height="152">';
-                                  i3.innerHTML = '<img src="test/'+imC+'.png" width="100" height="152">';
-                                  i4.innerHTML = '<img src="test/'+imD+'.png" width="100" height="152">';
-                                  i5.innerHTML = '<img src="test/'+imE+'.png" width="100" height="152">';
-                                  i6.innerHTML = '<img src="test/'+imF+'.png" width="100" height="152">';
-                                  i7.innerHTML = '<img src="test/'+imG+'.png" width="100" height="152">';
-                                  i8.innerHTML = '<img src="test/'+imH+'.png" width="100" height="152">';
-                                  i9.innerHTML = '<img src="test/'+imI+'.png" width="100" height="152">';
-                                  i10.innerHTML = '<img src="test/'+cb+'.png" width="100" height="152">'; };
+      pass.onclick = function(){page_max -= page_n
+                                if (page_max < page_n) {page_max = page_m;}
+                                refresh_galerie() };
+
+      function refresh_galerie(){var imgA = page_max;
+                                 var imgB = page_max-1;
+                                 var imgC = page_max-2;
+                                 var imgD = page_max-3;
+                                 var imgE = page_max-4;
+                                 var imgF = page_max-5;
+                                 var imgG = page_max-6;
+                                 var imgH = page_max-7;
+                                 var imgI = page_max-8;
+                                 img1.innerHTML = '<img src="test/'+imgA+'.png"></td>'
+                                 img2.innerHTML = '<img src="test/'+imgB+'.png"></td>'
+                                 img3.innerHTML = '<img src="test/'+imgC+'.png"></td>'
+                                 img4.innerHTML = '<img src="test/'+imgD+'.png"></td>'
+                                 img5.innerHTML = '<img src="test/'+imgE+'.png"></td>'
+                                 img6.innerHTML = '<img src="test/'+imgF+'.png"></td>'
+                                 img7.innerHTML = '<img src="test/'+imgG+'.png"></td>'
+                                 img8.innerHTML = '<img src="test/'+imgH+'.png"></td>'
+                                 img9.innerHTML = '<img src="test/'+imgI+'.png"></td>'};
 
     </script>
 
