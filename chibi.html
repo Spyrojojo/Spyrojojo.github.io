@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Spyrojojo & co</title>
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/x-icon" href="ressource/iconespyro.ico" />
+    <link rel="stylesheet" href="stylechibi.css" />
+  </head>
+
+  <body>
+    <div id='content'>
+
+      <header id='entete'> <a href='index.html'><img id='logo' src='ressource/logo.png'></a></header>
+
+      <aside id='side'>
+
+        <!--1er menu-->
+        <section id='rubrique'>
+          <h1>Mes galeries</h1>
+          <ul>
+            <li><a href='chibi.html'>Mes chibis</a></li>
+            <li>Mes colorisation</li>
+            <li>Mes objets</li>
+          </ul>
+        </section></br>
+
+        <!--Arole-->
+        <section id='rubrique'>
+          <h1>Projet Arole</h1>
+          <ul>
+            <li>Les personnages</li>
+            <li>L'histoire</li>
+            <li>Devblog</li>
+            <li>Galerie d'image</li>
+          </ul>
+        </section></br>
+
+        <!-- Facebook -->
+        <section id='rubrique'>
+          <h1>Autres sites</h1>
+          <ul>
+            <li>Ma boutique</li>
+            <li>Léa leynia</li>
+            <li>DeviantArt</li>
+          </ul>
+        </section></br>
+
+        <!-- Facebook -->
+        <section id='rubrique'>
+          <h1>Contact</h1>
+          <center>
+          <img src='ressource/fb.png'>
+          <img src='ressource/ml.png'>
+          <img src='ressource/yt.png'></center>
+        </section></br>
+
+        <section id='rubrique'>
+          <h1>Facebook</h1>
+          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSpyrojojo%2F&tabs=timeline%2C%20messages%2C&width=300&height=475&small_header=true&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="300" height="475" style="border:none;overflow:hidden" scrolling="yes" frameborder="0" allowTransparency="true"></iframe>
+        </section></br>
+
+        </div>
+
+
+      </aside>
+
+      <section id='section'>
+
+        <table align='center'>
+          <tr>
+            <td><h2 id='back'>  precedent  </h2></td>
+            <td><h2>-</h2></td>
+            <td><h2 id='pass'>  suivante  </h2></td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td id="img1"><img src='test/108.png'></td>
+            <td id="img2"><img src='test/107.png'></td>
+          </tr>
+          <tr>
+            <td id="img3"><img src='test/106.png'></td>
+            <td id="img4"><img src='test/105.png'></td>
+          </tr>
+          <tr>
+            <td id="img5"><img src='test/104.png'></td>
+            <td id="img6"><img src='test/103.png'></td>
+          </tr>
+        </table>
+
+        <table align='center'>
+          <tr>
+            <td><h2 id='back2'>  precedent  </h2></td>
+            <td><h2>-</h2></td>
+            <td><h2 id='pass2'>  suivante  </h2></td>
+          </tr>
+        </table>
+
+      </section></BR>
+
+    </div>
+
+    <script>
+      var maxi=108
+      var max = maxi
+      var num = 6
+      var img1 = document.getElementById('img1')
+      var img2 = document.getElementById('img2')
+      var img3 = document.getElementById('img3')
+      var img4 = document.getElementById('img4')
+      var img5 = document.getElementById('img5')
+      var img6 = document.getElementById('img6')
+      go_galerie()
+
+      function go_galerie(){var m2 = maxi-1;
+                            var m3 = maxi-2;
+                            var m4 = maxi-3;
+                            var m5 = maxi-4;
+                            var m6 = maxi-5;
+                            img1.innerHTML = '<img src="test/'+maxi+'.png"></td>'
+                            img2.innerHTML = '<img src="test/'+m2+'.png"></td>'
+                            img3.innerHTML = '<img src="test/'+m3+'.png"></td>'
+                            img4.innerHTML = '<img src="test/'+m4+'.png"></td>'
+                            img5.innerHTML = '<img src="test/'+m5+'.png"></td>'
+                            img6.innerHTML = '<img src="test/'+m6+'.png"></td>'};
+
+      back.onclick = function(){max += num
+                                if (max > maxi) {max = num;}
+                                refresh_galerie() };
+      pass.onclick = function(){max -= num
+                                if (max < num) {max = maxi;}
+                                refresh_galerie() };
+      back2.onclick = function(){max += num
+                                if (max > maxi) {max = num;}
+                                refresh_galerie() };
+      pass2.onclick = function(){max -= num
+                                if (max < num) {max = maxi;}
+                                refresh_galerie() };
+
+      function refresh_galerie(){var m2 = max-1;
+                                 var m3 = max-2;
+                                 var m4 = max-3;
+                                 var m5 = max-4;
+                                 var m6 = max-5;
+                                 img1.innerHTML = '<img src="test/'+max+'.png"></td>'
+                                 img2.innerHTML = '<img src="test/'+m2+'.png"></td>'
+                                 img3.innerHTML = '<img src="test/'+m3+'.png"></td>'
+                                 img4.innerHTML = '<img src="test/'+m4+'.png"></td>'
+                                 img5.innerHTML = '<img src="test/'+m5+'.png"></td>'
+                                 img6.innerHTML = '<img src="test/'+m6+'.png"></td>'};
+
+    </script>
+
+  </body>
+
+</html>

@@ -4,57 +4,91 @@
 
   <head>
     <title>Spyrojojo & co</title>
-    <link rel='stylesheet' href='style1.css' />
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/x-icon" href="ressource/iconespyro.ico" />
+    <link rel="stylesheet" href="style1.css" />
   </head>
 
   <body>
-    <center><a href='index.html'><img onclick="alert('on y est déja !');" src='ressource/logo.png' title="Vers la page d'acueil" ></a></center>
-    <center><table>
-      <tr>
-        <td><a id="op1" class='no-decoration' href='galerie_test.html'>Ma galerie</a></td>
-        <td><a id="op2" class='no-decoration' href='3d.html' >Mes petit objets</a></td>
-        <td><a id="op3" class='no-decoration' href='RM.html'>Projet Arole</a></td>
-        <td><a id="op4" class='no-decoration' href='http://www.facebook.com/spyrojojo/' title='vers ma page Facebook'>Facebook</a></td>
-        <td><a id="op5" class='no-decoration' href='http://poorlylickedbear.github.io' title='vers ma boutique'>Boutique</a></td>
-      </tr>
-    </table></center>
-    <h3 id="desc">Bienvenue sur mon petit site les amis, Bonne visite !</h3></br></br>
+    <div id='content'>
 
-    <h3 align=center> Dernier Ajout </h2>
+      <header id='entete'> <img id='logo' src='ressource/logo.png'></header>
 
-      <table align='center'> <!-- Galerie d'image "imgX"-->
-        <tr>
-          <td><img src='test/108.png' width=255 height =383></td>
-          <td><img src='test/107.png' width=255 height =383></td>
-          <td><img src='test/106.png' width=255 height =383></td>
-          <td><img src='test/105.png' width=255 height =383></td>
-          <td><img src='test/104.png' width=255 height =383></td>
-        </tr>
-      </table>
+      <aside id='side'>
 
-<center><iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fspyrojojo%2F&tabs=timeline%2C%20messages&width=800&height=400&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-        width="800"
-        height="400"
-        style="border:none;overflow:hidden"
-        scrolling="no" frameborder="0"
-        allowTransparency="true"></iframe></center>
+        <!--1er menu-->
+        <section id='rubrique'>
+          <h1>Mes galeries</h1>
+          <ul>
+            <li><a href='chibi.html'>Mes chibis</a></li>
+            <li>Mes colorisation</li>
+            <li>Mes objets</li>
+          </ul>
+        </section></br>
 
-    <script>
+        <!--Arole-->
+        <section id='rubrique'>
+          <h1>Projet Arole</h1>
+          <ul>
+            <li>Les personnages</li>
+            <li>L'histoire</li>
+            <li>Devblog</li>
+            <li>Galerie d'image</li>
+          </ul>
+        </section></br>
 
-      var menu1 = document.getElementById('desc');
-      var op1 = document.getElementById('op1');
-      var op2 = document.getElementById('op2');
-      var op3 = document.getElementById('op3');
-      var op4 = document.getElementById('op4');
-      var op5 = document.getElementById('op5');
+        <!-- Facebook -->
+        <section id='rubrique'>
+          <h1>Autres sites</h1>
+          <ul>
+            <li><a href='http://atelierdejo.github.io'>Ma boutique</a></li>
+            <li>Léa leynia</li>
+            <li><a href='http://spyrojojo.deviantart.com/'>DeviantArt</a></li>
+          </ul>
+        </section></br>
 
-      op1.onmouseover = function(){menu1.innerHTML = 'Pour voir mes réalisation graphique';};
-      op2.onmouseover = function(){menu1.innerHTML = 'Pour voir mes petit objets fait mains';};
-      op3.onmouseover = function(){menu1.innerHTML = 'Arole : un projet univers';};
-      op4.onmouseover = function(){menu1.innerHTML = 'si vous souhaitez me suivre sur facebook';};
-      op5.onmouseover = function(){menu1.innerHTML = 'Pour allez voir ma boutique';};
-      menu1.onmouseout = function(){menu1.innerHTML = 'Bienvenue sur mon petit site les amis, Bonne visite !';};
-    </script>
+        <!-- Facebook -->
+        <section id='rubrique'>
+          <h1>Contact</h1>
+          <center>
+          <img src='ressource/fb.png'>
+          <img src='ressource/ml.png'>
+          <img src='ressource/yt.png'></center>
+        </section></br>
+
+        <section id='rubrique'>
+          <h1>Facebook</h1>
+          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSpyrojojo%2F&tabs=timeline%2C%20messages%2C&width=300&height=475&small_header=true&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="300" height="475" style="border:none;overflow:hidden" scrolling="yes" frameborder="0" allowTransparency="true"></iframe>
+        </section></br>
+
+        </div>
+
+
+      </aside>
+
+      <section id='section'>
+        <article id='article'>
+          <h1>Le retour de la galerie</h1>
+          <p>La galerie de chibi et de nouveau disponible <a href='chibi.html'>ici</a></p>
+          <h2>05/10/2016</h2>
+        </article>
+        <article id='article'>
+          <h1>Un second petit article sur le site</h1>
+          <p> Ont continue dans les test du site avec un petit article image
+            avec comme test : le dernier chibi de la galerie</p>
+          <img src="test/108.png" width="100" height="150">
+          <h2>04/10/2016</h2>
+        </article>
+        <article id='article'>
+          <h1>1er article du site</h1>
+          <p> 1er article de la refonte du site au vue de jolie petite
+          nouveauté :D vis a vis de l'ancienne version.</p>
+          <h2>04/10/2016</h2>
+        </article>
+
+      </section></BR>
+
+    </div>
   </body>
 
 </html>

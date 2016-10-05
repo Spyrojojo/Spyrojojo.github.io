@@ -22,3 +22,5 @@ body {background-color:#36393e;}
 #article h1             {font-size:25px; color:#a0a8aa; background-color:#1e2124}
 #article h2             {font-size:15px; color:#a0a8aa; background-color:#1e2124}
 #article p              {color:#a0a8aa; font-size:20px; line-height:23px;}
+#section img            {width:380px; height:571px;}
+#section h2             {font-size:35px; color:white;}
