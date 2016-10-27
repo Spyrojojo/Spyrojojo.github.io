@@ -1,0 +1,25 @@
+body {background-color:#36393e;}
+
+/* CONTENUE */
+#content                  {width:1000px;margin:auto;}
+
+/* ENTETE */
+#entete                   {width:700px; margin:auto;}
+
+/* RUBRIQUE */
+#side                     {background-color:#2e3136;float:left;}
+#rubrique                 {width:305px; background-color:#2e3136; padding-left:5px; padding-right:5px;}
+#rubrique h1              {background-color:#282b30; color:white; padding:4px;}
+#rubrique iframe          {margin:auto;}
+#rubrique ul              {margin:0; padding:0;}
+#rubrique li              {margin:0; padding:0; list-style-type:none;}
+#rubrique img             {margin:auto;}
+#rubrique a               {color:#a0a8aa; text-decoration:none;}
+
+/* SECTION */
+#section                {width:800px; background-color:#2e3136; padding:5px; float:left; margin:auto;}
+#article                {background-color:#282b30}
+#article h1             {font-size:25px; color:#a0a8aa; background-color:#1e2124}
+#article h2             {font-size:15px; color:#a0a8aa; background-color:#1e2124}
+#section img            {display:block; width:80%; height:80%; margin:auto;}
+#section h2             {font-size:35px; color:white;}
