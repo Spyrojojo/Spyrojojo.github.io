@@ -1,0 +1,31 @@
+﻿{
+	"version": 1502319859,
+	"fileList": [
+		"data.js",
+		"c2runtime.js",
+		"jquery-2.1.1.min.js",
+		"offlineClient.js",
+		"IMAGES/background-sheet0.png",
+		"IMAGES/logo-sheet0.png",
+		"IMAGES/play-sheet0.png",
+		"IMAGES/reset-sheet0.png",
+		"IMAGES/sprite-sheet0.png",
+		"IMAGES/particles.png",
+		"IMAGES/obstacle_bas-sheet0.png",
+		"IMAGES/obstacle_haut-sheet0.png",
+		"IMAGES/player-sheet0.png",
+		"IMAGES/player-sheet1.png",
+		"DATA/bulle_1.ogg",
+		"DATA/bulle_2.ogg",
+		"DATA/bulle_3.ogg",
+		"DATA/ah_1.ogg",
+		"DATA/ah_2.ogg",
+		"DATA/otest.ogg",
+		"icon-16.png",
+		"icon-32.png",
+		"icon-114.png",
+		"icon-128.png",
+		"icon-256.png",
+		"loading-logo.png"
+	]
+}
