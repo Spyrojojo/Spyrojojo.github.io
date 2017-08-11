@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1502402109,
+	"version": 1502488055,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -10,9 +10,14 @@
 		"reset-sheet0.png",
 		"logo-sheet0.png",
 		"credit-sheet0.png",
+		"player-sheet0.png",
+		"deco_bas-sheet0.png",
+		"deco_haut-sheet0.png",
 		"bulle_1.ogg",
 		"bulle_2.ogg",
 		"bulle_3.ogg",
+		"ah_1.ogg",
+		"ah_2.ogg",
 		"otest.ogg",
 		"icon-16.png",
 		"icon-32.png",
