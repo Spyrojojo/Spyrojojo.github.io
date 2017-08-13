@@ -1,5 +1,5 @@
 ﻿CACHE MANIFEST
-#1502488055
+#1502632316
 data.js
 c2runtime.js
 jquery-2.1.1.min.js
@@ -12,11 +12,18 @@ credit-sheet0.png
 player-sheet0.png
 deco_bas-sheet0.png
 deco_haut-sheet0.png
+score_font.png
+meilleur_s-sheet0.png
+victory-sheet0.png
+defeat-sheet0.png
 bulle_1.ogg
 bulle_2.ogg
 bulle_3.ogg
 ah_1.ogg
 ah_2.ogg
+newrecord.ogg
+ohnogameover.ogg
+youwin.ogg
 otest.ogg
 icon-16.png
 icon-32.png

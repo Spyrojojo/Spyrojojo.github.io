@@ -19037,6 +19037,390 @@ cr.plugins_.Browser = function(runtime)
 }());
 ;
 ;
+var localForageInitFailed = false;
+try {
+/*!
+    localForage -- Offline Storage, Improved
+    Version 1.4.0
+    https://mozilla.github.io/localForage
+    (c) 2013-2015 Mozilla, Apache License 2.0
+*/
+!function(){var a,b,c,d;!function(){var e={},f={};a=function(a,b,c){e[a]={deps:b,callback:c}},d=c=b=function(a){function c(b){if("."!==b.charAt(0))return b;for(var c=b.split("/"),d=a.split("/").slice(0,-1),e=0,f=c.length;f>e;e++){var g=c[e];if(".."===g)d.pop();else{if("."===g)continue;d.push(g)}}return d.join("/")}if(d._eak_seen=e,f[a])return f[a];if(f[a]={},!e[a])throw new Error("Could not find module "+a);for(var g,h=e[a],i=h.deps,j=h.callback,k=[],l=0,m=i.length;m>l;l++)"exports"===i[l]?k.push(g={}):k.push(b(c(i[l])));var n=j.apply(this,k);return f[a]=g||n}}(),a("promise/all",["./utils","exports"],function(a,b){"use strict";function c(a){var b=this;if(!d(a))throw new TypeError("You must pass an array to all.");return new b(function(b,c){function d(a){return function(b){f(a,b)}}function f(a,c){h[a]=c,0===--i&&b(h)}var g,h=[],i=a.length;0===i&&b([]);for(var j=0;j<a.length;j++)g=a[j],g&&e(g.then)?g.then(d(j),c):f(j,g)})}var d=a.isArray,e=a.isFunction;b.all=c}),a("promise/asap",["exports"],function(a){"use strict";function b(){return function(){process.nextTick(e)}}function c(){var a=0,b=new i(e),c=document.createTextNode("");return b.observe(c,{characterData:!0}),function(){c.data=a=++a%2}}function d(){return function(){j.setTimeout(e,1)}}function e(){for(var a=0;a<k.length;a++){var b=k[a],c=b[0],d=b[1];c(d)}k=[]}function f(a,b){var c=k.push([a,b]);1===c&&g()}var g,h="undefined"!=typeof window?window:{},i=h.MutationObserver||h.WebKitMutationObserver,j="undefined"!=typeof global?global:void 0===this?window:this,k=[];g="undefined"!=typeof process&&"[object process]"==={}.toString.call(process)?b():i?c():d(),a.asap=f}),a("promise/config",["exports"],function(a){"use strict";function b(a,b){return 2!==arguments.length?c[a]:void(c[a]=b)}var c={instrument:!1};a.config=c,a.configure=b}),a("promise/polyfill",["./promise","./utils","exports"],function(a,b,c){"use strict";function d(){var a;a="undefined"!=typeof global?global:"undefined"!=typeof window&&window.document?window:self;var b="Promise"in a&&"resolve"in a.Promise&&"reject"in a.Promise&&"all"in a.Promise&&"race"in a.Promise&&function(){var b;return new a.Promise(function(a){b=a}),f(b)}();b||(a.Promise=e)}var e=a.Promise,f=b.isFunction;c.polyfill=d}),a("promise/promise",["./config","./utils","./all","./race","./resolve","./reject","./asap","exports"],function(a,b,c,d,e,f,g,h){"use strict";function i(a){if(!v(a))throw new TypeError("You must pass a resolver function as the first argument to the promise constructor");if(!(this instanceof i))throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");this._subscribers=[],j(a,this)}function j(a,b){function c(a){o(b,a)}function d(a){q(b,a)}try{a(c,d)}catch(e){d(e)}}function k(a,b,c,d){var e,f,g,h,i=v(c);if(i)try{e=c(d),g=!0}catch(j){h=!0,f=j}else e=d,g=!0;n(b,e)||(i&&g?o(b,e):h?q(b,f):a===D?o(b,e):a===E&&q(b,e))}function l(a,b,c,d){var e=a._subscribers,f=e.length;e[f]=b,e[f+D]=c,e[f+E]=d}function m(a,b){for(var c,d,e=a._subscribers,f=a._detail,g=0;g<e.length;g+=3)c=e[g],d=e[g+b],k(b,c,d,f);a._subscribers=null}function n(a,b){var c,d=null;try{if(a===b)throw new TypeError("A promises callback cannot return that same promise.");if(u(b)&&(d=b.then,v(d)))return d.call(b,function(d){return c?!0:(c=!0,void(b!==d?o(a,d):p(a,d)))},function(b){return c?!0:(c=!0,void q(a,b))}),!0}catch(e){return c?!0:(q(a,e),!0)}return!1}function o(a,b){a===b?p(a,b):n(a,b)||p(a,b)}function p(a,b){a._state===B&&(a._state=C,a._detail=b,t.async(r,a))}function q(a,b){a._state===B&&(a._state=C,a._detail=b,t.async(s,a))}function r(a){m(a,a._state=D)}function s(a){m(a,a._state=E)}var t=a.config,u=(a.configure,b.objectOrFunction),v=b.isFunction,w=(b.now,c.all),x=d.race,y=e.resolve,z=f.reject,A=g.asap;t.async=A;var B=void 0,C=0,D=1,E=2;i.prototype={constructor:i,_state:void 0,_detail:void 0,_subscribers:void 0,then:function(a,b){var c=this,d=new this.constructor(function(){});if(this._state){var e=arguments;t.async(function(){k(c._state,d,e[c._state-1],c._detail)})}else l(this,d,a,b);return d},"catch":function(a){return this.then(null,a)}},i.all=w,i.race=x,i.resolve=y,i.reject=z,h.Promise=i}),a("promise/race",["./utils","exports"],function(a,b){"use strict";function c(a){var b=this;if(!d(a))throw new TypeError("You must pass an array to race.");return new b(function(b,c){for(var d,e=0;e<a.length;e++)d=a[e],d&&"function"==typeof d.then?d.then(b,c):b(d)})}var d=a.isArray;b.race=c}),a("promise/reject",["exports"],function(a){"use strict";function b(a){var b=this;return new b(function(b,c){c(a)})}a.reject=b}),a("promise/resolve",["exports"],function(a){"use strict";function b(a){if(a&&"object"==typeof a&&a.constructor===this)return a;var b=this;return new b(function(b){b(a)})}a.resolve=b}),a("promise/utils",["exports"],function(a){"use strict";function b(a){return c(a)||"object"==typeof a&&null!==a}function c(a){return"function"==typeof a}function d(a){return"[object Array]"===Object.prototype.toString.call(a)}var e=Date.now||function(){return(new Date).getTime()};a.objectOrFunction=b,a.isFunction=c,a.isArray=d,a.now=e}),b("promise/polyfill").polyfill()}(),function(a,b){"object"==typeof exports&&"object"==typeof module?module.exports=b():"function"==typeof define&&define.amd?define([],b):"object"==typeof exports?exports.localforage=b():a.localforage=b()}(this,function(){return function(a){function b(d){if(c[d])return c[d].exports;var e=c[d]={exports:{},id:d,loaded:!1};return a[d].call(e.exports,e,e.exports,b),e.loaded=!0,e.exports}var c={};return b.m=a,b.c=c,b.p="",b(0)}([function(a,b,c){"use strict";function d(a,b){if(!(a instanceof b))throw new TypeError("Cannot call a class as a function")}b.__esModule=!0;var e=function(a){function b(a,b){a[b]=function(){var c=arguments;return a.ready().then(function(){return a[b].apply(a,c)})}}function e(){for(var a=1;a<arguments.length;a++){var b=arguments[a];if(b)for(var c in b)b.hasOwnProperty(c)&&(m(b[c])?arguments[0][c]=b[c].slice():arguments[0][c]=b[c])}return arguments[0]}function f(a){for(var b in h)if(h.hasOwnProperty(b)&&h[b]===a)return!0;return!1}var g={},h={INDEXEDDB:"asyncStorage",LOCALSTORAGE:"localStorageWrapper",WEBSQL:"webSQLStorage"},i=[h.INDEXEDDB,h.WEBSQL,h.LOCALSTORAGE],j=["clear","getItem","iterate","key","keys","length","removeItem","setItem"],k={description:"",driver:i.slice(),name:"localforage",size:4980736,storeName:"keyvaluepairs",version:1},l=function(a){var b={};return b[h.INDEXEDDB]=!!function(){try{var b=b||a.indexedDB||a.webkitIndexedDB||a.mozIndexedDB||a.OIndexedDB||a.msIndexedDB;return"undefined"!=typeof a.openDatabase&&a.navigator&&a.navigator.userAgent&&/Safari/.test(a.navigator.userAgent)&&!/Chrome/.test(a.navigator.userAgent)?!1:b&&"function"==typeof b.open&&"undefined"!=typeof a.IDBKeyRange}catch(c){return!1}}(),b[h.WEBSQL]=!!function(){try{return a.openDatabase}catch(b){return!1}}(),b[h.LOCALSTORAGE]=!!function(){try{return a.localStorage&&"setItem"in a.localStorage&&a.localStorage.setItem}catch(b){return!1}}(),b}(a),m=Array.isArray||function(a){return"[object Array]"===Object.prototype.toString.call(a)},n=function(){function a(b){d(this,a),this.INDEXEDDB=h.INDEXEDDB,this.LOCALSTORAGE=h.LOCALSTORAGE,this.WEBSQL=h.WEBSQL,this._defaultConfig=e({},k),this._config=e({},this._defaultConfig,b),this._driverSet=null,this._initDriver=null,this._ready=!1,this._dbInfo=null,this._wrapLibraryMethodsWithReady(),this.setDriver(this._config.driver)}return a.prototype.config=function(a){if("object"==typeof a){if(this._ready)return new Error("Can't call config() after localforage has been used.");for(var b in a)"storeName"===b&&(a[b]=a[b].replace(/\W/g,"_")),this._config[b]=a[b];return"driver"in a&&a.driver&&this.setDriver(this._config.driver),!0}return"string"==typeof a?this._config[a]:this._config},a.prototype.defineDriver=function(a,b,c){var d=new Promise(function(b,c){try{var d=a._driver,e=new Error("Custom driver not compliant; see https://mozilla.github.io/localForage/#definedriver"),h=new Error("Custom driver name already in use: "+a._driver);if(!a._driver)return void c(e);if(f(a._driver))return void c(h);for(var i=j.concat("_initStorage"),k=0;k<i.length;k++){var m=i[k];if(!m||!a[m]||"function"!=typeof a[m])return void c(e)}var n=Promise.resolve(!0);"_support"in a&&(n=a._support&&"function"==typeof a._support?a._support():Promise.resolve(!!a._support)),n.then(function(c){l[d]=c,g[d]=a,b()},c)}catch(o){c(o)}});return d.then(b,c),d},a.prototype.driver=function(){return this._driver||null},a.prototype.getDriver=function(a,b,d){var e=this,h=function(){if(f(a))switch(a){case e.INDEXEDDB:return new Promise(function(a,b){a(c(1))});case e.LOCALSTORAGE:return new Promise(function(a,b){a(c(2))});case e.WEBSQL:return new Promise(function(a,b){a(c(4))})}else if(g[a])return Promise.resolve(g[a]);return Promise.reject(new Error("Driver not found."))}();return h.then(b,d),h},a.prototype.getSerializer=function(a){var b=new Promise(function(a,b){a(c(3))});return a&&"function"==typeof a&&b.then(function(b){a(b)}),b},a.prototype.ready=function(a){var b=this,c=b._driverSet.then(function(){return null===b._ready&&(b._ready=b._initDriver()),b._ready});return c.then(a,a),c},a.prototype.setDriver=function(a,b,c){function d(){f._config.driver=f.driver()}function e(a){return function(){function b(){for(;c<a.length;){var e=a[c];return c++,f._dbInfo=null,f._ready=null,f.getDriver(e).then(function(a){return f._extend(a),d(),f._ready=f._initStorage(f._config),f._ready})["catch"](b)}d();var g=new Error("No available storage method found.");return f._driverSet=Promise.reject(g),f._driverSet}var c=0;return b()}}var f=this;m(a)||(a=[a]);var g=this._getSupportedDrivers(a),h=null!==this._driverSet?this._driverSet["catch"](function(){return Promise.resolve()}):Promise.resolve();return this._driverSet=h.then(function(){var a=g[0];return f._dbInfo=null,f._ready=null,f.getDriver(a).then(function(a){f._driver=a._driver,d(),f._wrapLibraryMethodsWithReady(),f._initDriver=e(g)})})["catch"](function(){d();var a=new Error("No available storage method found.");return f._driverSet=Promise.reject(a),f._driverSet}),this._driverSet.then(b,c),this._driverSet},a.prototype.supports=function(a){return!!l[a]},a.prototype._extend=function(a){e(this,a)},a.prototype._getSupportedDrivers=function(a){for(var b=[],c=0,d=a.length;d>c;c++){var e=a[c];this.supports(e)&&b.push(e)}return b},a.prototype._wrapLibraryMethodsWithReady=function(){for(var a=0;a<j.length;a++)b(this,j[a])},a.prototype.createInstance=function(b){return new a(b)},a}();return new n}("undefined"!=typeof window?window:self);b["default"]=e,a.exports=b["default"]},function(a,b){"use strict";b.__esModule=!0;var c=function(a){function b(b,c){b=b||[],c=c||{};try{return new Blob(b,c)}catch(d){if("TypeError"!==d.name)throw d;for(var e=a.BlobBuilder||a.MSBlobBuilder||a.MozBlobBuilder||a.WebKitBlobBuilder,f=new e,g=0;g<b.length;g+=1)f.append(b[g]);return f.getBlob(c.type)}}function c(a){for(var b=a.length,c=new ArrayBuffer(b),d=new Uint8Array(c),e=0;b>e;e++)d[e]=a.charCodeAt(e);return c}function d(a){return new Promise(function(b,c){var d=new XMLHttpRequest;d.open("GET",a),d.withCredentials=!0,d.responseType="arraybuffer",d.onreadystatechange=function(){return 4===d.readyState?200===d.status?b({response:d.response,type:d.getResponseHeader("Content-Type")}):void c({status:d.status,response:d.response}):void 0},d.send()})}function e(a){return new Promise(function(c,e){var f=b([""],{type:"image/png"}),g=a.transaction([D],"readwrite");g.objectStore(D).put(f,"key"),g.oncomplete=function(){var b=a.transaction([D],"readwrite"),f=b.objectStore(D).get("key");f.onerror=e,f.onsuccess=function(a){var b=a.target.result,e=URL.createObjectURL(b);d(e).then(function(a){c(!(!a||"image/png"!==a.type))},function(){c(!1)}).then(function(){URL.revokeObjectURL(e)})}},g.onerror=g.onabort=e})["catch"](function(){return!1})}function f(a){return"boolean"==typeof B?Promise.resolve(B):e(a).then(function(a){return B=a})}function g(a){return new Promise(function(b,c){var d=new FileReader;d.onerror=c,d.onloadend=function(c){var d=btoa(c.target.result||"");b({__local_forage_encoded_blob:!0,data:d,type:a.type})},d.readAsBinaryString(a)})}function h(a){var d=c(atob(a.data));return b([d],{type:a.type})}function i(a){return a&&a.__local_forage_encoded_blob}function j(a){var b=this,c=b._initReady().then(function(){var a=C[b._dbInfo.name];return a&&a.dbReady?a.dbReady:void 0});return c.then(a,a),c}function k(a){var b=C[a.name],c={};c.promise=new Promise(function(a){c.resolve=a}),b.deferredOperations.push(c),b.dbReady?b.dbReady=b.dbReady.then(function(){return c.promise}):b.dbReady=c.promise}function l(a){var b=C[a.name],c=b.deferredOperations.pop();c&&c.resolve()}function m(a){function b(){return Promise.resolve()}var c=this,d={db:null};if(a)for(var e in a)d[e]=a[e];C||(C={});var f=C[d.name];f||(f={forages:[],db:null,dbReady:null,deferredOperations:[]},C[d.name]=f),f.forages.push(c),c._initReady||(c._initReady=c.ready,c.ready=j);for(var g=[],h=0;h<f.forages.length;h++){var i=f.forages[h];i!==c&&g.push(i._initReady()["catch"](b))}var k=f.forages.slice(0);return Promise.all(g).then(function(){return d.db=f.db,n(d)}).then(function(a){return d.db=a,q(d,c._defaultConfig.version)?o(d):a}).then(function(a){d.db=f.db=a,c._dbInfo=d;for(var b=0;b<k.length;b++){var e=k[b];e!==c&&(e._dbInfo.db=d.db,e._dbInfo.version=d.version)}})}function n(a){return p(a,!1)}function o(a){return p(a,!0)}function p(b,c){return new Promise(function(d,e){if(b.db){if(!c)return d(b.db);k(b),b.db.close()}var f=[b.name];c&&f.push(b.version);var g=A.open.apply(A,f);c&&(g.onupgradeneeded=function(c){var d=g.result;try{d.createObjectStore(b.storeName),c.oldVersion<=1&&d.createObjectStore(D)}catch(e){if("ConstraintError"!==e.name)throw e;a.console.warn('The database "'+b.name+'" has been upgraded from version '+c.oldVersion+" to version "+c.newVersion+', but the storage "'+b.storeName+'" already exists.')}}),g.onerror=function(){e(g.error)},g.onsuccess=function(){d(g.result),l(b)}})}function q(b,c){if(!b.db)return!0;var d=!b.db.objectStoreNames.contains(b.storeName),e=b.version<b.db.version,f=b.version>b.db.version;if(e&&(b.version!==c&&a.console.warn('The database "'+b.name+"\" can't be downgraded from version "+b.db.version+" to version "+b.version+"."),b.version=b.db.version),f||d){if(d){var g=b.db.version+1;g>b.version&&(b.version=g)}return!0}return!1}function r(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=new Promise(function(a,c){d.ready().then(function(){var e=d._dbInfo,f=e.db.transaction(e.storeName,"readonly").objectStore(e.storeName),g=f.get(b);g.onsuccess=function(){var b=g.result;void 0===b&&(b=null),i(b)&&(b=h(b)),a(b)},g.onerror=function(){c(g.error)}})["catch"](c)});return z(e,c),e}function s(a,b){var c=this,d=new Promise(function(b,d){c.ready().then(function(){var e=c._dbInfo,f=e.db.transaction(e.storeName,"readonly").objectStore(e.storeName),g=f.openCursor(),j=1;g.onsuccess=function(){var c=g.result;if(c){var d=c.value;i(d)&&(d=h(d));var e=a(d,c.key,j++);void 0!==e?b(e):c["continue"]()}else b()},g.onerror=function(){d(g.error)}})["catch"](d)});return z(d,b),d}function t(b,c,d){var e=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var h=new Promise(function(a,d){var h;e.ready().then(function(){return h=e._dbInfo,c instanceof Blob?f(h.db).then(function(a){return a?c:g(c)}):c}).then(function(c){var e=h.db.transaction(h.storeName,"readwrite"),f=e.objectStore(h.storeName);null===c&&(c=void 0),e.oncomplete=function(){void 0===c&&(c=null),a(c)},e.onabort=e.onerror=function(){var a=g.error?g.error:g.transaction.error;d(a)};var g=f.put(c,b)})["catch"](d)});return z(h,d),h}function u(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=new Promise(function(a,c){d.ready().then(function(){var e=d._dbInfo,f=e.db.transaction(e.storeName,"readwrite"),g=f.objectStore(e.storeName),h=g["delete"](b);f.oncomplete=function(){a()},f.onerror=function(){c(h.error)},f.onabort=function(){var a=h.error?h.error:h.transaction.error;c(a)}})["catch"](c)});return z(e,c),e}function v(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo,e=d.db.transaction(d.storeName,"readwrite"),f=e.objectStore(d.storeName),g=f.clear();e.oncomplete=function(){a()},e.onabort=e.onerror=function(){var a=g.error?g.error:g.transaction.error;c(a)}})["catch"](c)});return z(c,a),c}function w(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo,e=d.db.transaction(d.storeName,"readonly").objectStore(d.storeName),f=e.count();f.onsuccess=function(){a(f.result)},f.onerror=function(){c(f.error)}})["catch"](c)});return z(c,a),c}function x(a,b){var c=this,d=new Promise(function(b,d){return 0>a?void b(null):void c.ready().then(function(){var e=c._dbInfo,f=e.db.transaction(e.storeName,"readonly").objectStore(e.storeName),g=!1,h=f.openCursor();h.onsuccess=function(){var c=h.result;return c?void(0===a?b(c.key):g?b(c.key):(g=!0,c.advance(a))):void b(null)},h.onerror=function(){d(h.error)}})["catch"](d)});return z(d,b),d}function y(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo,e=d.db.transaction(d.storeName,"readonly").objectStore(d.storeName),f=e.openCursor(),g=[];f.onsuccess=function(){var b=f.result;return b?(g.push(b.key),void b["continue"]()):void a(g)},f.onerror=function(){c(f.error)}})["catch"](c)});return z(c,a),c}function z(a,b){b&&a.then(function(a){b(null,a)},function(a){b(a)})}var A=A||a.indexedDB||a.webkitIndexedDB||a.mozIndexedDB||a.OIndexedDB||a.msIndexedDB;if(A){var B,C,D="local-forage-detect-blob-support",E={_driver:"asyncStorage",_initStorage:m,iterate:s,getItem:r,setItem:t,removeItem:u,clear:v,length:w,key:x,keys:y};return E}}("undefined"!=typeof window?window:self);b["default"]=c,a.exports=b["default"]},function(a,b,c){"use strict";b.__esModule=!0;var d=function(a){function b(a){var b=this,d={};if(a)for(var e in a)d[e]=a[e];return d.keyPrefix=d.name+"/",d.storeName!==b._defaultConfig.storeName&&(d.keyPrefix+=d.storeName+"/"),b._dbInfo=d,new Promise(function(a,b){a(c(3))}).then(function(a){return d.serializer=a,Promise.resolve()})}function d(a){var b=this,c=b.ready().then(function(){for(var a=b._dbInfo.keyPrefix,c=m.length-1;c>=0;c--){var d=m.key(c);0===d.indexOf(a)&&m.removeItem(d)}});return l(c,a),c}function e(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=d.ready().then(function(){var a=d._dbInfo,c=m.getItem(a.keyPrefix+b);return c&&(c=a.serializer.deserialize(c)),c});return l(e,c),e}function f(a,b){var c=this,d=c.ready().then(function(){for(var b=c._dbInfo,d=b.keyPrefix,e=d.length,f=m.length,g=1,h=0;f>h;h++){var i=m.key(h);if(0===i.indexOf(d)){var j=m.getItem(i);if(j&&(j=b.serializer.deserialize(j)),j=a(j,i.substring(e),g++),void 0!==j)return j}}});return l(d,b),d}function g(a,b){var c=this,d=c.ready().then(function(){var b,d=c._dbInfo;try{b=m.key(a)}catch(e){b=null}return b&&(b=b.substring(d.keyPrefix.length)),b});return l(d,b),d}function h(a){var b=this,c=b.ready().then(function(){for(var a=b._dbInfo,c=m.length,d=[],e=0;c>e;e++)0===m.key(e).indexOf(a.keyPrefix)&&d.push(m.key(e).substring(a.keyPrefix.length));return d});return l(c,a),c}function i(a){var b=this,c=b.keys().then(function(a){return a.length});return l(c,a),c}function j(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=d.ready().then(function(){var a=d._dbInfo;m.removeItem(a.keyPrefix+b)});return l(e,c),e}function k(b,c,d){var e=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var f=e.ready().then(function(){void 0===c&&(c=null);var a=c;return new Promise(function(d,f){var g=e._dbInfo;g.serializer.serialize(c,function(c,e){if(e)f(e);else try{m.setItem(g.keyPrefix+b,c),d(a)}catch(h){("QuotaExceededError"===h.name||"NS_ERROR_DOM_QUOTA_REACHED"===h.name)&&f(h),f(h)}})})});return l(f,d),f}function l(a,b){b&&a.then(function(a){b(null,a)},function(a){b(a)})}var m=null;try{if(!(a.localStorage&&"setItem"in a.localStorage))return;m=a.localStorage}catch(n){return}var o={_driver:"localStorageWrapper",_initStorage:b,iterate:f,getItem:e,setItem:k,removeItem:j,clear:d,length:i,key:g,keys:h};return o}("undefined"!=typeof window?window:self);b["default"]=d,a.exports=b["default"]},function(a,b){"use strict";b.__esModule=!0;var c=function(a){function b(b,c){b=b||[],c=c||{};try{return new Blob(b,c)}catch(d){if("TypeError"!==d.name)throw d;for(var e=a.BlobBuilder||a.MSBlobBuilder||a.MozBlobBuilder||a.WebKitBlobBuilder,f=new e,g=0;g<b.length;g+=1)f.append(b[g]);return f.getBlob(c.type)}}function c(a,b){var c="";if(a&&(c=a.toString()),a&&("[object ArrayBuffer]"===a.toString()||a.buffer&&"[object ArrayBuffer]"===a.buffer.toString())){var d,e=j;a instanceof ArrayBuffer?(d=a,e+=l):(d=a.buffer,"[object Int8Array]"===c?e+=n:"[object Uint8Array]"===c?e+=o:"[object Uint8ClampedArray]"===c?e+=p:"[object Int16Array]"===c?e+=q:"[object Uint16Array]"===c?e+=s:"[object Int32Array]"===c?e+=r:"[object Uint32Array]"===c?e+=t:"[object Float32Array]"===c?e+=u:"[object Float64Array]"===c?e+=v:b(new Error("Failed to get type for BinaryArray"))),b(e+f(d))}else if("[object Blob]"===c){var g=new FileReader;g.onload=function(){var c=h+a.type+"~"+f(this.result);b(j+m+c)},g.readAsArrayBuffer(a)}else try{b(JSON.stringify(a))}catch(i){console.error("Couldn't convert value into a JSON string: ",a),b(null,i)}}function d(a){if(a.substring(0,k)!==j)return JSON.parse(a);var c,d=a.substring(w),f=a.substring(k,w);if(f===m&&i.test(d)){var g=d.match(i);c=g[1],d=d.substring(g[0].length)}var h=e(d);switch(f){case l:return h;case m:return b([h],{type:c});case n:return new Int8Array(h);case o:return new Uint8Array(h);case p:return new Uint8ClampedArray(h);case q:return new Int16Array(h);case s:return new Uint16Array(h);case r:return new Int32Array(h);case t:return new Uint32Array(h);case u:return new Float32Array(h);case v:return new Float64Array(h);default:throw new Error("Unkown type: "+f)}}function e(a){var b,c,d,e,f,h=.75*a.length,i=a.length,j=0;"="===a[a.length-1]&&(h--,"="===a[a.length-2]&&h--);var k=new ArrayBuffer(h),l=new Uint8Array(k);for(b=0;i>b;b+=4)c=g.indexOf(a[b]),d=g.indexOf(a[b+1]),e=g.indexOf(a[b+2]),f=g.indexOf(a[b+3]),l[j++]=c<<2|d>>4,l[j++]=(15&d)<<4|e>>2,l[j++]=(3&e)<<6|63&f;return k}function f(a){var b,c=new Uint8Array(a),d="";for(b=0;b<c.length;b+=3)d+=g[c[b]>>2],d+=g[(3&c[b])<<4|c[b+1]>>4],d+=g[(15&c[b+1])<<2|c[b+2]>>6],d+=g[63&c[b+2]];return c.length%3===2?d=d.substring(0,d.length-1)+"=":c.length%3===1&&(d=d.substring(0,d.length-2)+"=="),d}var g="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",h="~~local_forage_type~",i=/^~~local_forage_type~([^~]+)~/,j="__lfsc__:",k=j.length,l="arbf",m="blob",n="si08",o="ui08",p="uic8",q="si16",r="si32",s="ur16",t="ui32",u="fl32",v="fl64",w=k+l.length,x={serialize:c,deserialize:d,stringToBuffer:e,bufferToString:f};return x}("undefined"!=typeof window?window:self);b["default"]=c,a.exports=b["default"]},function(a,b,c){"use strict";b.__esModule=!0;var d=function(a){function b(a){var b=this,d={db:null};if(a)for(var e in a)d[e]="string"!=typeof a[e]?a[e].toString():a[e];var f=new Promise(function(a,c){try{d.db=m(d.name,String(d.version),d.description,d.size)}catch(e){return c(e)}d.db.transaction(function(e){e.executeSql("CREATE TABLE IF NOT EXISTS "+d.storeName+" (id INTEGER PRIMARY KEY, key unique, value)",[],function(){b._dbInfo=d,a()},function(a,b){c(b)})})});return new Promise(function(a,b){a(c(3))}).then(function(a){return d.serializer=a,f})}function d(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=new Promise(function(a,c){d.ready().then(function(){var e=d._dbInfo;e.db.transaction(function(d){d.executeSql("SELECT * FROM "+e.storeName+" WHERE key = ? LIMIT 1",[b],function(b,c){var d=c.rows.length?c.rows.item(0).value:null;d&&(d=e.serializer.deserialize(d)),a(d)},function(a,b){c(b)})})})["catch"](c)});return l(e,c),e}function e(a,b){var c=this,d=new Promise(function(b,d){c.ready().then(function(){var e=c._dbInfo;e.db.transaction(function(c){c.executeSql("SELECT * FROM "+e.storeName,[],function(c,d){for(var f=d.rows,g=f.length,h=0;g>h;h++){var i=f.item(h),j=i.value;if(j&&(j=e.serializer.deserialize(j)),j=a(j,i.key,h+1),void 0!==j)return void b(j)}b()},function(a,b){d(b)})})})["catch"](d)});return l(d,b),d}function f(b,c,d){var e=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var f=new Promise(function(a,d){e.ready().then(function(){void 0===c&&(c=null);var f=c,g=e._dbInfo;g.serializer.serialize(c,function(c,e){e?d(e):g.db.transaction(function(e){e.executeSql("INSERT OR REPLACE INTO "+g.storeName+" (key, value) VALUES (?, ?)",[b,c],function(){a(f)},function(a,b){d(b)})},function(a){a.code===a.QUOTA_ERR&&d(a)})})})["catch"](d)});return l(f,d),f}function g(b,c){var d=this;"string"!=typeof b&&(a.console.warn(b+" used as a key, but it is not a string."),b=String(b));var e=new Promise(function(a,c){d.ready().then(function(){var e=d._dbInfo;e.db.transaction(function(d){d.executeSql("DELETE FROM "+e.storeName+" WHERE key = ?",[b],function(){a()},function(a,b){c(b)})})})["catch"](c)});return l(e,c),e}function h(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo;d.db.transaction(function(b){b.executeSql("DELETE FROM "+d.storeName,[],function(){a()},function(a,b){c(b)})})})["catch"](c)});return l(c,a),c}function i(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo;d.db.transaction(function(b){b.executeSql("SELECT COUNT(key) as c FROM "+d.storeName,[],function(b,c){var d=c.rows.item(0).c;a(d)},function(a,b){c(b)})})})["catch"](c)});return l(c,a),c}function j(a,b){var c=this,d=new Promise(function(b,d){c.ready().then(function(){var e=c._dbInfo;e.db.transaction(function(c){c.executeSql("SELECT key FROM "+e.storeName+" WHERE id = ? LIMIT 1",[a+1],function(a,c){var d=c.rows.length?c.rows.item(0).key:null;b(d)},function(a,b){d(b)})})})["catch"](d)});return l(d,b),d}function k(a){var b=this,c=new Promise(function(a,c){b.ready().then(function(){var d=b._dbInfo;d.db.transaction(function(b){b.executeSql("SELECT key FROM "+d.storeName,[],function(b,c){for(var d=[],e=0;e<c.rows.length;e++)d.push(c.rows.item(e).key);a(d)},function(a,b){c(b)})})})["catch"](c)});return l(c,a),c}function l(a,b){b&&a.then(function(a){b(null,a)},function(a){b(a)})}var m=a.openDatabase;if(m){var n={_driver:"webSQLStorage",_initStorage:b,iterate:e,getItem:d,setItem:f,removeItem:g,clear:h,length:i,key:j,keys:k};return n}}("undefined"!=typeof window?window:self);b["default"]=d,a.exports=b["default"]}])});
+}
+catch (e)
+{
+	localForageInitFailed = true;
+}
+cr.plugins_.LocalStorage = function(runtime)
+{
+	this.runtime = runtime;
+};
+(function ()
+{
+	var currentKey = "";
+	var lastValue = "";
+	var keyNamesList = [];
+	var errorMessage = "";
+	function getErrorString(err)
+	{
+		if (!err)
+			return "unknown error";
+		else if (typeof err === "string")
+			return err;
+		else if (typeof err.message === "string")
+			return err.message;
+		else if (typeof err.name === "string")
+			return err.name;
+		else if (typeof err.data === "string")
+			return err.data;
+		else
+			return "unknown error";
+	};
+	function TriggerStorageError(self, msg)
+	{
+		errorMessage = msg;
+		self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+	};
+	var prefix = "";
+	var is_arcade = (typeof window["is_scirra_arcade"] !== "undefined");
+	if (is_arcade)
+		prefix = "sa" + window["scirra_arcade_id"] + "_";
+	function hasRequiredPrefix(key)
+	{
+		if (!prefix)
+			return true;
+		return key.substr(0, prefix.length) === prefix;
+	};
+	function removePrefix(key)
+	{
+		if (!prefix)
+			return key;
+		if (hasRequiredPrefix(key))
+			return key.substr(prefix.length);
+	};
+	var pluginProto = cr.plugins_.LocalStorage.prototype;
+	pluginProto.Type = function(plugin)
+	{
+		this.plugin = plugin;
+		this.runtime = plugin.runtime;
+	};
+	var typeProto = pluginProto.Type.prototype;
+	typeProto.onCreate = function()
+	{
+	};
+	pluginProto.Instance = function(type)
+	{
+		this.type = type;
+		this.runtime = type.runtime;
+	};
+	var instanceProto = pluginProto.Instance.prototype;
+	instanceProto.onCreate = function()
+	{
+		this.pendingSets = 0;		// number of pending 'Set item' actions
+		this.pendingGets = 0;		// number of pending 'Get item' actions
+	};
+	instanceProto.onDestroy = function ()
+	{
+	};
+	instanceProto.saveToJSON = function ()
+	{
+		return {
+		};
+	};
+	instanceProto.loadFromJSON = function (o)
+	{
+	};
+	var debugDataChanged = true;
+	function Cnds() {};
+	Cnds.prototype.OnItemSet = function (key)
+	{
+		return currentKey === key;
+	};
+	Cnds.prototype.OnAnyItemSet = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnItemGet = function (key)
+	{
+		return currentKey === key;
+	};
+	Cnds.prototype.OnAnyItemGet = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnItemRemoved = function (key)
+	{
+		return currentKey === key;
+	};
+	Cnds.prototype.OnAnyItemRemoved = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnCleared = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnAllKeyNamesLoaded = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnError = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnItemExists = function (key)
+	{
+		return currentKey === key;
+	};
+	Cnds.prototype.OnItemMissing = function (key)
+	{
+		return currentKey === key;
+	};
+	Cnds.prototype.CompareKey = function (cmp, key)
+	{
+		return cr.do_cmp(currentKey, cmp, key);
+	};
+	Cnds.prototype.CompareValue = function (cmp, v)
+	{
+		return cr.do_cmp(lastValue, cmp, v);
+	};
+	Cnds.prototype.IsProcessingSets = function ()
+	{
+		return this.pendingSets > 0;
+	};
+	Cnds.prototype.IsProcessingGets = function ()
+	{
+		return this.pendingGets > 0;
+	};
+	Cnds.prototype.OnAllSetsComplete = function ()
+	{
+		return true;
+	};
+	Cnds.prototype.OnAllGetsComplete = function ()
+	{
+		return true;
+	};
+	pluginProto.cnds = new Cnds();
+	function Acts() {};
+	Acts.prototype.SetItem = function (keyNoPrefix, value)
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		var keyPrefix = prefix + keyNoPrefix;
+		this.pendingSets++;
+		var self = this;
+		localforage["setItem"](keyPrefix, value, function (err, valueSet)
+		{
+			debugDataChanged = true;
+			self.pendingSets--;
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				currentKey = keyNoPrefix;
+				lastValue = valueSet;
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAnyItemSet, self);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnItemSet, self);
+				currentKey = "";
+				lastValue = "";
+			}
+			if (self.pendingSets === 0)
+			{
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAllSetsComplete, self);
+			}
+		});
+	};
+	Acts.prototype.GetItem = function (keyNoPrefix)
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		var keyPrefix = prefix + keyNoPrefix;
+		this.pendingGets++;
+		var self = this;
+		localforage["getItem"](keyPrefix, function (err, value)
+		{
+			self.pendingGets--;
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				currentKey = keyNoPrefix;
+				lastValue = value;
+				if (typeof lastValue === "undefined" || lastValue === null)
+					lastValue = "";
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAnyItemGet, self);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnItemGet, self);
+				currentKey = "";
+				lastValue = "";
+			}
+			if (self.pendingGets === 0)
+			{
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAllGetsComplete, self);
+			}
+		});
+	};
+	Acts.prototype.CheckItemExists = function (keyNoPrefix)
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		var keyPrefix = prefix + keyNoPrefix;
+		var self = this;
+		localforage["getItem"](keyPrefix, function (err, value)
+		{
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				currentKey = keyNoPrefix;
+				if (value === null)		// null value indicates key missing
+				{
+					lastValue = "";		// prevent ItemValue meaning anything
+					self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnItemMissing, self);
+				}
+				else
+				{
+					lastValue = value;	// make available to ItemValue expression
+					self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnItemExists, self);
+				}
+				currentKey = "";
+				lastValue = "";
+			}
+		});
+	};
+	Acts.prototype.RemoveItem = function (keyNoPrefix)
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		var keyPrefix = prefix + keyNoPrefix;
+		var self = this;
+		localforage["removeItem"](keyPrefix, function (err)
+		{
+			debugDataChanged = true;
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				currentKey = keyNoPrefix;
+				lastValue = "";
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAnyItemRemoved, self);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnItemRemoved, self);
+				currentKey = "";
+			}
+		});
+	};
+	Acts.prototype.ClearStorage = function ()
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		if (is_arcade)
+			return;
+		var self = this;
+		localforage["clear"](function (err)
+		{
+			debugDataChanged = true;
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				currentKey = "";
+				lastValue = "";
+				cr.clearArray(keyNamesList);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnCleared, self);
+			}
+		});
+	};
+	Acts.prototype.GetAllKeyNames = function ()
+	{
+		if (localForageInitFailed)
+		{
+			TriggerStorageError(this, "storage failed to initialise - may be disabled in browser settings");
+			return;
+		}
+		var self = this;
+		localforage["keys"](function (err, keyList)
+		{
+			var i, len, k;
+			if (err)
+			{
+				errorMessage = getErrorString(err);
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnError, self);
+			}
+			else
+			{
+				cr.clearArray(keyNamesList);
+				for (i = 0, len = keyList.length; i < len; ++i)
+				{
+					k = keyList[i];
+					if (!hasRequiredPrefix(k))
+						continue;
+					keyNamesList.push(removePrefix(k));
+				}
+				self.runtime.trigger(cr.plugins_.LocalStorage.prototype.cnds.OnAllKeyNamesLoaded, self);
+			}
+		});
+	};
+	pluginProto.acts = new Acts();
+	function Exps() {};
+	Exps.prototype.ItemValue = function (ret)
+	{
+		ret.set_any(lastValue);
+	};
+	Exps.prototype.Key = function (ret)
+	{
+		ret.set_string(currentKey);
+	};
+	Exps.prototype.KeyCount = function (ret)
+	{
+		ret.set_int(keyNamesList.length);
+	};
+	Exps.prototype.KeyAt = function (ret, i)
+	{
+		i = Math.floor(i);
+		if (i < 0 || i >= keyNamesList.length)
+		{
+			ret.set_string("");
+			return;
+		}
+		ret.set_string(keyNamesList[i]);
+	};
+	Exps.prototype.ErrorMessage = function (ret)
+	{
+		ret.set_string(errorMessage);
+	};
+	pluginProto.exps = new Exps();
+}());
+;
+;
 cr.plugins_.Sprite = function(runtime)
 {
 	this.runtime = runtime;
@@ -20279,6 +20663,783 @@ cr.plugins_.Sprite = function(runtime)
 	Exps.prototype.ImageHeight = function (ret)
 	{
 		ret.set_float(this.curFrame.height);
+	};
+	pluginProto.exps = new Exps();
+}());
+/* global cr,log,assert2 */
+/* jshint globalstrict: true */
+/* jshint strict: true */
+;
+;
+cr.plugins_.Spritefont2 = function(runtime)
+{
+	this.runtime = runtime;
+};
+(function ()
+{
+	var pluginProto = cr.plugins_.Spritefont2.prototype;
+	pluginProto.onCreate = function ()
+	{
+	};
+	pluginProto.Type = function(plugin)
+	{
+		this.plugin = plugin;
+		this.runtime = plugin.runtime;
+	};
+	var typeProto = pluginProto.Type.prototype;
+	typeProto.onCreate = function()
+	{
+		if (this.is_family)
+			return;
+		this.texture_img = new Image();
+		this.runtime.waitForImageLoad(this.texture_img, this.texture_file);
+		this.webGL_texture = null;
+	};
+	typeProto.onLostWebGLContext = function ()
+	{
+		if (this.is_family)
+			return;
+		this.webGL_texture = null;
+	};
+	typeProto.onRestoreWebGLContext = function ()
+	{
+		if (this.is_family || !this.instances.length)
+			return;
+		if (!this.webGL_texture)
+		{
+			this.webGL_texture = this.runtime.glwrap.loadTexture(this.texture_img, false, this.runtime.linearSampling, this.texture_pixelformat);
+		}
+		var i, len;
+		for (i = 0, len = this.instances.length; i < len; i++)
+			this.instances[i].webGL_texture = this.webGL_texture;
+	};
+	typeProto.unloadTextures = function ()
+	{
+		if (this.is_family || this.instances.length || !this.webGL_texture)
+			return;
+		this.runtime.glwrap.deleteTexture(this.webGL_texture);
+		this.webGL_texture = null;
+	};
+	typeProto.preloadCanvas2D = function (ctx)
+	{
+		ctx.drawImage(this.texture_img, 0, 0);
+	};
+	pluginProto.Instance = function(type)
+	{
+		this.type = type;
+		this.runtime = type.runtime;
+	};
+	var instanceProto = pluginProto.Instance.prototype;
+	instanceProto.onDestroy = function()
+	{
+		freeAllLines (this.lines);
+		freeAllClip  (this.clipList);
+		freeAllClipUV(this.clipUV);
+		cr.wipe(this.characterWidthList);
+	};
+	instanceProto.onCreate = function()
+	{
+		this.texture_img      = this.type.texture_img;
+		this.characterWidth   = this.properties[0];
+		this.characterHeight  = this.properties[1];
+		this.characterSet     = this.properties[2];
+		this.text             = this.properties[3];
+		this.characterScale   = this.properties[4];
+		this.visible          = (this.properties[5] === 0);	// 0=visible, 1=invisible
+		this.halign           = this.properties[6]/2.0;		// 0=left, 1=center, 2=right
+		this.valign           = this.properties[7]/2.0;		// 0=top, 1=center, 2=bottom
+		this.wrapbyword       = (this.properties[9] === 0);	// 0=word, 1=character
+		this.characterSpacing = this.properties[10];
+		this.lineHeight       = this.properties[11];
+		this.textWidth  = 0;
+		this.textHeight = 0;
+		if (this.recycled)
+		{
+			cr.clearArray(this.lines);
+			cr.wipe(this.clipList);
+			cr.wipe(this.clipUV);
+			cr.wipe(this.characterWidthList);
+		}
+		else
+		{
+			this.lines = [];
+			this.clipList = {};
+			this.clipUV = {};
+			this.characterWidthList = {};
+		}
+		this.text_changed = true;
+		this.lastwrapwidth = this.width;
+		if (this.runtime.glwrap)
+		{
+			if (!this.type.webGL_texture)
+			{
+				this.type.webGL_texture = this.runtime.glwrap.loadTexture(this.type.texture_img, false, this.runtime.linearSampling, this.type.texture_pixelformat);
+			}
+			this.webGL_texture = this.type.webGL_texture;
+		}
+		this.SplitSheet();
+	};
+	instanceProto.saveToJSON = function ()
+	{
+		var save = {
+			"t": this.text,
+			"csc": this.characterScale,
+			"csp": this.characterSpacing,
+			"lh": this.lineHeight,
+			"tw": this.textWidth,
+			"th": this.textHeight,
+			"lrt": this.last_render_tick,
+			"ha": this.halign,
+			"va": this.valign,
+			"cw": {}
+		};
+		for (var ch in this.characterWidthList)
+			save["cw"][ch] = this.characterWidthList[ch];
+		return save;
+	};
+	instanceProto.loadFromJSON = function (o)
+	{
+		this.text = o["t"];
+		this.characterScale = o["csc"];
+		this.characterSpacing = o["csp"];
+		this.lineHeight = o["lh"];
+		this.textWidth = o["tw"];
+		this.textHeight = o["th"];
+		this.last_render_tick = o["lrt"];
+		if (o.hasOwnProperty("ha"))
+			this.halign = o["ha"];
+		if (o.hasOwnProperty("va"))
+			this.valign = o["va"];
+		for(var ch in o["cw"])
+			this.characterWidthList[ch] = o["cw"][ch];
+		this.text_changed = true;
+		this.lastwrapwidth = this.width;
+	};
+	function trimRight(text)
+	{
+		return text.replace(/\s\s*$/, '');
+	}
+	var MAX_CACHE_SIZE = 1000;
+	function alloc(cache,Constructor)
+	{
+		if (cache.length)
+			return cache.pop();
+		else
+			return new Constructor();
+	}
+	function free(cache,data)
+	{
+		if (cache.length < MAX_CACHE_SIZE)
+		{
+			cache.push(data);
+		}
+	}
+	function freeAll(cache,dataList,isArray)
+	{
+		if (isArray) {
+			var i, len;
+			for (i = 0, len = dataList.length; i < len; i++)
+			{
+				free(cache,dataList[i]);
+			}
+			cr.clearArray(dataList);
+		} else {
+			var prop;
+			for(prop in dataList) {
+				if(Object.prototype.hasOwnProperty.call(dataList,prop)) {
+					free(cache,dataList[prop]);
+					delete dataList[prop];
+				}
+			}
+		}
+	}
+	function addLine(inst,lineIndex,cur_line) {
+		var lines = inst.lines;
+		var line;
+		cur_line = trimRight(cur_line);
+		if (lineIndex >= lines.length)
+			lines.push(allocLine());
+		line = lines[lineIndex];
+		line.text = cur_line;
+		line.width = inst.measureWidth(cur_line);
+		inst.textWidth = cr.max(inst.textWidth,line.width);
+	}
+	var linesCache = [];
+	function allocLine()       { return alloc(linesCache,Object); }
+	function freeLine(l)       { free(linesCache,l); }
+	function freeAllLines(arr) { freeAll(linesCache,arr,true); }
+	function addClip(obj,property,x,y,w,h) {
+		if (obj[property] === undefined) {
+			obj[property] = alloc(clipCache,Object);
+		}
+		obj[property].x = x;
+		obj[property].y = y;
+		obj[property].w = w;
+		obj[property].h = h;
+	}
+	var clipCache = [];
+	function allocClip()      { return alloc(clipCache,Object); }
+	function freeAllClip(obj) { freeAll(clipCache,obj,false);}
+	function addClipUV(obj,property,left,top,right,bottom) {
+		if (obj[property] === undefined) {
+			obj[property] = alloc(clipUVCache,cr.rect);
+		}
+		obj[property].left   = left;
+		obj[property].top    = top;
+		obj[property].right  = right;
+		obj[property].bottom = bottom;
+	}
+	var clipUVCache = [];
+	function allocClipUV()      { return alloc(clipUVCache,cr.rect);}
+	function freeAllClipUV(obj) { freeAll(clipUVCache,obj,false);}
+	instanceProto.SplitSheet = function() {
+		var texture      = this.texture_img;
+		var texWidth     = texture.width;
+		var texHeight    = texture.height;
+		var charWidth    = this.characterWidth;
+		var charHeight   = this.characterHeight;
+		var charU        = charWidth /texWidth;
+		var charV        = charHeight/texHeight;
+		var charSet      = this.characterSet ;
+		var cols = Math.floor(texWidth/charWidth);
+		var rows = Math.floor(texHeight/charHeight);
+		for ( var c = 0; c < charSet.length; c++) {
+			if  (c >= cols * rows) break;
+			var x = c%cols;
+			var y = Math.floor(c/cols);
+			var letter = charSet.charAt(c);
+			if (this.runtime.glwrap) {
+				addClipUV(
+					this.clipUV, letter,
+					x * charU ,
+					y * charV ,
+					(x+1) * charU ,
+					(y+1) * charV
+				);
+			} else {
+				addClip(
+					this.clipList, letter,
+					x * charWidth,
+					y * charHeight,
+					charWidth,
+					charHeight
+				);
+			}
+		}
+	};
+	/*
+     *	Word-Wrapping
+     */
+	var wordsCache = [];
+	pluginProto.TokeniseWords = function (text)
+	{
+		cr.clearArray(wordsCache);
+		var cur_word = "";
+		var ch;
+		var i = 0;
+		while (i < text.length)
+		{
+			ch = text.charAt(i);
+			if (ch === "\n")
+			{
+				if (cur_word.length)
+				{
+					wordsCache.push(cur_word);
+					cur_word = "";
+				}
+				wordsCache.push("\n");
+				++i;
+			}
+			else if (ch === " " || ch === "\t" || ch === "-")
+			{
+				do {
+					cur_word += text.charAt(i);
+					i++;
+				}
+				while (i < text.length && (text.charAt(i) === " " || text.charAt(i) === "\t"));
+				wordsCache.push(cur_word);
+				cur_word = "";
+			}
+			else if (i < text.length)
+			{
+				cur_word += ch;
+				i++;
+			}
+		}
+		if (cur_word.length)
+			wordsCache.push(cur_word);
+	};
+	pluginProto.WordWrap = function (inst)
+	{
+		var text = inst.text;
+		var lines = inst.lines;
+		if (!text || !text.length)
+		{
+			freeAllLines(lines);
+			return;
+		}
+		var width = inst.width;
+		if (width <= 2.0)
+		{
+			freeAllLines(lines);
+			return;
+		}
+		var charWidth = inst.characterWidth;
+		var charScale = inst.characterScale;
+		var charSpacing = inst.characterSpacing;
+		if ( (text.length * (charWidth * charScale + charSpacing) - charSpacing) <= width && text.indexOf("\n") === -1)
+		{
+			var all_width = inst.measureWidth(text);
+			if (all_width <= width)
+			{
+				freeAllLines(lines);
+				lines.push(allocLine());
+				lines[0].text = text;
+				lines[0].width = all_width;
+				inst.textWidth  = all_width;
+				inst.textHeight = inst.characterHeight * charScale + inst.lineHeight;
+				return;
+			}
+		}
+		var wrapbyword = inst.wrapbyword;
+		this.WrapText(inst);
+		inst.textHeight = lines.length * (inst.characterHeight * charScale + inst.lineHeight);
+	};
+	pluginProto.WrapText = function (inst)
+	{
+		var wrapbyword = inst.wrapbyword;
+		var text       = inst.text;
+		var lines      = inst.lines;
+		var width      = inst.width;
+		var wordArray;
+		if (wrapbyword) {
+			this.TokeniseWords(text);	// writes to wordsCache
+			wordArray = wordsCache;
+		} else {
+			wordArray = text;
+		}
+		var cur_line = "";
+		var prev_line;
+		var line_width;
+		var i;
+		var lineIndex = 0;
+		var line;
+		var ignore_newline = false;
+		for (i = 0; i < wordArray.length; i++)
+		{
+			if (wordArray[i] === "\n")
+			{
+				if (ignore_newline === true) {
+					ignore_newline = false;
+				} else {
+					addLine(inst,lineIndex,cur_line);
+					lineIndex++;
+				}
+				cur_line = "";
+				continue;
+			}
+			ignore_newline = false;
+			prev_line = cur_line;
+			cur_line += wordArray[i];
+			line_width = inst.measureWidth(trimRight(cur_line));
+			if (line_width > width)
+			{
+				if (prev_line === "") {
+					addLine(inst,lineIndex,cur_line);
+					cur_line = "";
+					ignore_newline = true;
+				} else {
+					addLine(inst,lineIndex,prev_line);
+					cur_line = wordArray[i];
+				}
+				lineIndex++;
+				if (!wrapbyword && cur_line === " ")
+					cur_line = "";
+			}
+		}
+		if (trimRight(cur_line).length)
+		{
+			addLine(inst,lineIndex,cur_line);
+			lineIndex++;
+		}
+		for (i = lineIndex; i < lines.length; i++)
+			freeLine(lines[i]);
+		lines.length = lineIndex;
+	};
+	instanceProto.measureWidth = function(text) {
+		var spacing = this.characterSpacing;
+		var len     = text.length;
+		var width   = 0;
+		for (var i = 0; i < len; i++) {
+			width += this.getCharacterWidth(text.charAt(i)) * this.characterScale + spacing;
+		}
+		width -= (width > 0) ? spacing : 0;
+		return width;
+	};
+	/***/
+	instanceProto.getCharacterWidth = function(character) {
+		var widthList = this.characterWidthList;
+		if (widthList[character] !== undefined) {
+			return widthList[character];
+		} else {
+			return this.characterWidth;
+		}
+	};
+	instanceProto.rebuildText = function() {
+		if (this.text_changed || this.width !== this.lastwrapwidth) {
+			this.textWidth = 0;
+			this.textHeight = 0;
+			this.type.plugin.WordWrap(this);
+			this.text_changed = false;
+			this.lastwrapwidth = this.width;
+		}
+	};
+	var EPSILON = 0.00001;
+	instanceProto.draw = function(ctx, glmode)
+	{
+		var texture = this.texture_img;
+		if (this.text !== "" && texture != null) {
+			this.rebuildText();
+			if (this.height < this.characterHeight*this.characterScale + this.lineHeight) {
+				return;
+			}
+			ctx.globalAlpha = this.opacity;
+			var myx = this.x;
+			var myy = this.y;
+			if (this.runtime.pixel_rounding)
+			{
+				myx = Math.round(myx);
+				myy = Math.round(myy);
+			}
+			var viewLeft = this.layer.viewLeft;
+			var viewTop = this.layer.viewTop;
+			var viewRight = this.layer.viewRight;
+			var viewBottom = this.layer.viewBottom;
+			ctx.save();
+			ctx.translate(myx, myy);
+			ctx.rotate(this.angle);
+			var angle      = this.angle;
+			var ha         = this.halign;
+			var va         = this.valign;
+			var scale      = this.characterScale;
+			var charHeight = this.characterHeight * scale;
+			var lineHeight = this.lineHeight;
+			var charSpace  = this.characterSpacing;
+			var lines = this.lines;
+			var textHeight = this.textHeight;
+			var letterWidth;
+			var halign;
+			var valign = va * cr.max(0,(this.height - textHeight));
+			var offx = -(this.hotspotX * this.width);
+			var offy = -(this.hotspotY * this.height);
+			offy += valign;
+			var drawX ;
+			var drawY = offy;
+			var roundX, roundY;
+			for(var i = 0; i < lines.length; i++) {
+				var line = lines[i].text;
+				var len  = lines[i].width;
+				halign = ha * cr.max(0,this.width - len);
+				drawX = offx + halign;
+				drawY += lineHeight;
+				if (angle === 0 && myy + drawY + charHeight < viewTop)
+				{
+					drawY += charHeight;
+					continue;
+				}
+				for(var j = 0; j < line.length; j++) {
+					var letter = line.charAt(j);
+					letterWidth = this.getCharacterWidth(letter);
+					var clip = this.clipList[letter];
+					if (angle === 0 && myx + drawX + letterWidth * scale + charSpace < viewLeft)
+					{
+						drawX += letterWidth * scale + charSpace;
+						continue;
+					}
+					if ( drawX + letterWidth * scale > this.width + EPSILON ) {
+						break;
+					}
+					if (clip !== undefined) {
+						roundX = drawX;
+						roundY = drawY;
+						if (angle === 0 && scale === 1)
+						{
+							roundX = Math.round(roundX);
+							roundY = Math.round(roundY);
+						}
+						ctx.drawImage( this.texture_img,
+									 clip.x, clip.y, clip.w, clip.h,
+									 roundX,roundY,clip.w*scale,clip.h*scale);
+					}
+					drawX += letterWidth * scale + charSpace;
+					if (angle === 0 && myx + drawX > viewRight)
+						break;
+				}
+				drawY += charHeight;
+				if (angle === 0 && (drawY + charHeight + lineHeight > this.height || myy + drawY > viewBottom))
+				{
+					break;
+				}
+			}
+			ctx.restore();
+		}
+	};
+	var dQuad = new cr.quad();
+	function rotateQuad(quad,cosa,sina) {
+		var x_temp;
+		x_temp   = (quad.tlx * cosa) - (quad.tly * sina);
+		quad.tly = (quad.tly * cosa) + (quad.tlx * sina);
+		quad.tlx = x_temp;
+		x_temp    = (quad.trx * cosa) - (quad.try_ * sina);
+		quad.try_ = (quad.try_ * cosa) + (quad.trx * sina);
+		quad.trx  = x_temp;
+		x_temp   = (quad.blx * cosa) - (quad.bly * sina);
+		quad.bly = (quad.bly * cosa) + (quad.blx * sina);
+		quad.blx = x_temp;
+		x_temp    = (quad.brx * cosa) - (quad.bry * sina);
+		quad.bry = (quad.bry * cosa) + (quad.brx * sina);
+		quad.brx  = x_temp;
+	}
+	instanceProto.drawGL = function(glw)
+	{
+		glw.setTexture(this.webGL_texture);
+		glw.setOpacity(this.opacity);
+		if (!this.text)
+			return;
+		this.rebuildText();
+		if (this.height < this.characterHeight*this.characterScale + this.lineHeight) {
+			return;
+		}
+		this.update_bbox();
+		var q = this.bquad;
+		var ox = 0;
+		var oy = 0;
+		if (this.runtime.pixel_rounding)
+		{
+			ox = Math.round(this.x) - this.x;
+			oy = Math.round(this.y) - this.y;
+		}
+		var viewLeft = this.layer.viewLeft;
+		var viewTop = this.layer.viewTop;
+		var viewRight = this.layer.viewRight;
+		var viewBottom = this.layer.viewBottom;
+		var angle      = this.angle;
+		var ha         = this.halign;
+		var va         = this.valign;
+		var scale      = this.characterScale;
+		var charHeight = this.characterHeight * scale;   // to precalculate in onCreate or on change
+		var lineHeight = this.lineHeight;
+		var charSpace  = this.characterSpacing;
+		var lines = this.lines;
+		var textHeight = this.textHeight;
+		var letterWidth;
+		var cosa,sina;
+		if (angle !== 0)
+		{
+			cosa = Math.cos(angle);
+			sina = Math.sin(angle);
+		}
+		var halign;
+		var valign = va * cr.max(0,(this.height - textHeight));
+		var offx = q.tlx + ox;
+		var offy = q.tly + oy;
+		var drawX ;
+		var drawY = valign;
+		var roundX, roundY;
+		for(var i = 0; i < lines.length; i++) {
+			var line       = lines[i].text;
+			var lineWidth  = lines[i].width;
+			halign = ha * cr.max(0,this.width - lineWidth);
+			drawX = halign;
+			drawY += lineHeight;
+			if (angle === 0 && offy + drawY + charHeight < viewTop)
+			{
+				drawY += charHeight;
+				continue;
+			}
+			for(var j = 0; j < line.length; j++) {
+				var letter = line.charAt(j);
+				letterWidth = this.getCharacterWidth(letter);
+				var clipUV = this.clipUV[letter];
+				if (angle === 0 && offx + drawX + letterWidth * scale + charSpace < viewLeft)
+				{
+					drawX += letterWidth * scale + charSpace;
+					continue;
+				}
+				if (drawX + letterWidth * scale > this.width + EPSILON)
+				{
+					break;
+				}
+				if (clipUV !== undefined) {
+					var clipWidth  = this.characterWidth*scale;
+					var clipHeight = this.characterHeight*scale;
+					roundX = drawX;
+					roundY = drawY;
+					if (angle === 0 && scale === 1)
+					{
+						roundX = Math.round(roundX);
+						roundY = Math.round(roundY);
+					}
+					dQuad.tlx  = roundX;
+					dQuad.tly  = roundY;
+					dQuad.trx  = roundX + clipWidth;
+					dQuad.try_ = roundY ;
+					dQuad.blx  = roundX;
+					dQuad.bly  = roundY + clipHeight;
+					dQuad.brx  = roundX + clipWidth;
+					dQuad.bry  = roundY + clipHeight;
+					if(angle !== 0)
+					{
+						rotateQuad(dQuad,cosa,sina);
+					}
+					dQuad.offset(offx,offy);
+					glw.quadTex(
+						dQuad.tlx, dQuad.tly,
+						dQuad.trx, dQuad.try_,
+						dQuad.brx, dQuad.bry,
+						dQuad.blx, dQuad.bly,
+						clipUV
+					);
+				}
+				drawX += letterWidth * scale + charSpace;
+				if (angle === 0 && offx + drawX > viewRight)
+					break;
+			}
+			drawY += charHeight;
+			if (angle === 0 && (drawY + charHeight + lineHeight > this.height || offy + drawY > viewBottom))
+			{
+				break;
+			}
+		}
+	};
+	function Cnds() {}
+	Cnds.prototype.CompareText = function(text_to_compare, case_sensitive)
+	{
+		if (case_sensitive)
+			return this.text == text_to_compare;
+		else
+			return cr.equals_nocase(this.text, text_to_compare);
+	};
+	pluginProto.cnds = new Cnds();
+	function Acts() {}
+	Acts.prototype.SetText = function(param)
+	{
+		if (cr.is_number(param) && param < 1e9)
+			param = Math.round(param * 1e10) / 1e10;	// round to nearest ten billionth - hides floating point errors
+		var text_to_set = param.toString();
+		if (this.text !== text_to_set)
+		{
+			this.text = text_to_set;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.AppendText = function(param)
+	{
+		if (cr.is_number(param))
+			param = Math.round(param * 1e10) / 1e10;	// round to nearest ten billionth - hides floating point errors
+		var text_to_append = param.toString();
+		if (text_to_append)	// not empty
+		{
+			this.text += text_to_append;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.SetScale = function(param)
+	{
+		if (param !== this.characterScale) {
+			this.characterScale = param;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.SetCharacterSpacing = function(param)
+	{
+		if (param !== this.CharacterSpacing) {
+			this.characterSpacing = param;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.SetLineHeight = function(param)
+	{
+		if (param !== this.lineHeight) {
+			this.lineHeight = param;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	instanceProto.SetCharWidth = function(character,width) {
+		var w = parseInt(width,10);
+		if (this.characterWidthList[character] !== w) {
+			this.characterWidthList[character] = w;
+			this.text_changed = true;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.SetCharacterWidth = function(characterSet,width)
+	{
+		if (characterSet !== "") {
+			for(var c = 0; c < characterSet.length; c++) {
+				this.SetCharWidth(characterSet.charAt(c),width);
+			}
+		}
+	};
+	Acts.prototype.SetEffect = function (effect)
+	{
+		this.blend_mode = effect;
+		this.compositeOp = cr.effectToCompositeOp(effect);
+		cr.setGLBlend(this, effect, this.runtime.gl);
+		this.runtime.redraw = true;
+	};
+	Acts.prototype.SetHAlign = function (a)
+	{
+		this.halign = a / 2.0;
+		this.text_changed = true;
+		this.runtime.redraw = true;
+	};
+	Acts.prototype.SetVAlign = function (a)
+	{
+		this.valign = a / 2.0;
+		this.text_changed = true;
+		this.runtime.redraw = true;
+	};
+	pluginProto.acts = new Acts();
+	function Exps() {}
+	Exps.prototype.CharacterWidth = function(ret,character)
+	{
+		ret.set_int(this.getCharacterWidth(character));
+	};
+	Exps.prototype.CharacterHeight = function(ret)
+	{
+		ret.set_int(this.characterHeight);
+	};
+	Exps.prototype.CharacterScale = function(ret)
+	{
+		ret.set_float(this.characterScale);
+	};
+	Exps.prototype.CharacterSpacing = function(ret)
+	{
+		ret.set_int(this.characterSpacing);
+	};
+	Exps.prototype.LineHeight = function(ret)
+	{
+		ret.set_int(this.lineHeight);
+	};
+	Exps.prototype.Text = function(ret)
+	{
+		ret.set_string(this.text);
+	};
+	Exps.prototype.TextWidth = function (ret)
+	{
+		this.rebuildText();
+		ret.set_float(this.textWidth);
+	};
+	Exps.prototype.TextHeight = function (ret)
+	{
+		this.rebuildText();
+		ret.set_float(this.textHeight);
 	};
 	pluginProto.exps = new Exps();
 }());
@@ -22087,26 +23248,35 @@ cr.plugins_.Touch = function(runtime)
 cr.getObjectRefTable = function () { return [
 	cr.plugins_.Audio,
 	cr.plugins_.Browser,
-	cr.plugins_.Text,
-	cr.plugins_.Sprite,
+	cr.plugins_.LocalStorage,
+	cr.plugins_.Spritefont2,
 	cr.plugins_.Touch,
+	cr.plugins_.Sprite,
+	cr.plugins_.Text,
 	cr.system_object.prototype.cnds.OnLayoutStart,
 	cr.system_object.prototype.acts.SetGroupActive,
+	cr.plugins_.LocalStorage.prototype.acts.CheckItemExists,
+	cr.plugins_.LocalStorage.prototype.cnds.OnItemExists,
+	cr.system_object.prototype.acts.SetVar,
+	cr.plugins_.LocalStorage.prototype.exps.ItemValue,
 	cr.system_object.prototype.cnds.IsGroupActive,
+	cr.system_object.prototype.cnds.CompareVar,
+	cr.plugins_.Spritefont2.prototype.acts.SetText,
+	cr.system_object.prototype.cnds.Else,
+	cr.system_object.prototype.cnds.TriggerOnce,
 	cr.plugins_.Sprite.prototype.acts.SetOpacity,
+	cr.plugins_.Spritefont2.prototype.acts.SetOpacity,
 	cr.plugins_.Audio.prototype.cnds.IsTagPlaying,
 	cr.plugins_.Audio.prototype.acts.Play,
 	cr.plugins_.Sprite.prototype.cnds.CompareOpacity,
 	cr.plugins_.Sprite.prototype.exps.Opacity,
-	cr.system_object.prototype.cnds.Else,
+	cr.plugins_.Spritefont2.prototype.exps.Opacity,
 	cr.plugins_.Touch.prototype.cnds.IsTouchingObject,
-	cr.system_object.prototype.cnds.TriggerOnce,
+	cr.plugins_.LocalStorage.prototype.acts.SetItem,
 	cr.plugins_.Browser.prototype.acts.Vibrate,
 	cr.system_object.prototype.acts.Wait,
 	cr.plugins_.Touch.prototype.cnds.IsInTouch,
-	cr.system_object.prototype.acts.SetVar,
 	cr.system_object.prototype.exps.choose,
-	cr.system_object.prototype.cnds.CompareVar,
 	cr.system_object.prototype.acts.GoToLayout,
 	cr.plugins_.Sprite.prototype.acts.StopAnim,
 	cr.plugins_.Sprite.prototype.acts.SetX,
@@ -22120,7 +23290,8 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.exps.round,
 	cr.system_object.prototype.exps.random,
 	cr.system_object.prototype.acts.AddVar,
-	cr.plugins_.Text.prototype.acts.SetText,
-	cr.plugins_.Sprite.prototype.cnds.OnCollision
+	cr.plugins_.Sprite.prototype.cnds.OnCollision,
+	cr.plugins_.Sprite.prototype.acts.SetAnim,
+	cr.plugins_.Sprite.prototype.acts.SetEffect
 ];};
 
